@@ -75,13 +75,17 @@ public class MainActivity extends AppCompatActivity {
                 viewPager2.setVisibility(View.GONE);
                 frameLayout.setVisibility(View.VISIBLE);
                 switch (item.getItemId()){
-                    case R.id.bottom_home: getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new HomeMenu()).commit();
-                    return true;
-                    case R.id.bottom_cart: getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CartMenu()).commit();
+                    case id.bottom_home:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new HomeMenu()).commit();
                         return true;
-                    case R.id.bottom_notification: getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new NotificationMenu()).commit();
+                    case id.bottom_cart:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new CartMenu()).commit();
                         return true;
-                    case R.id.bottom_account: getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new AccountMenu()).commit();
+                    case id.bottom_notification:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new NotificationMenu()).commit();
+                        return true;
+                    case id.bottom_account:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new AccountMenu()).commit();
                         return true;
                 }
                 return false;

@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseFirestore firestore;
     ProgressDialog progressDialog;
     Button btn_login_again;
-    ImageView btn_register;
+    Button btn_register;
 
     EditText edtName, edtEmail, edtPassword;
 
@@ -44,8 +44,8 @@ public class RegisterActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Create your account");
-        progressDialog.setMessage("Please wait !");
+        progressDialog.setTitle("Tạo tài khoản");
+        progressDialog.setMessage("Đang thực hiện !");
 
         btn_login_again = findViewById(R.id.btn_login_again);
         btn_register = findViewById(R.id.btn_register);
@@ -61,12 +61,12 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = edtPassword.getText().toString();
 
                 if(name.isEmpty()){
-                    edtName.setError("Enter your name");
+                    edtName.setError("Hãy đặt tên tài khoản");
 
                 }else if(email.isEmpty()){
-                    edtEmail.setError("Enter your email");
+                    edtEmail.setError("Hãy nhập email hợp lệ");
                 }else if(password.isEmpty()){
-                    edtPassword.setError("Enter your password");
+                    edtPassword.setError("Hãy đặt mật khẩu");
                 }else{
                     progressDialog.show();
                     auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                @Override
                                                public void onComplete(@NonNull Task<Void> task) {
                                                    progressDialog.dismiss();
-                                                   Toast.makeText(RegisterActivity.this, "Register successfully !", Toast.LENGTH_SHORT).show();
+                                                   Toast.makeText(RegisterActivity.this, "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
                                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
 
                                                }
@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                @Override
                                                public void onFailure(@NonNull Exception e) {
                                                    progressDialog.dismiss();
-                                                   Toast.makeText(RegisterActivity.this, "Register failure !", Toast.LENGTH_LONG).show();
+                                                   Toast.makeText(RegisterActivity.this, "Đăng ký thất bại !", Toast.LENGTH_LONG).show();
                                                }
                                            });
                                         }
@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 });
                             }else{
                                 progressDialog.dismiss();
-                                Toast.makeText(RegisterActivity.this, "Register failure !", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "Đăng ký thất bại !", Toast.LENGTH_LONG).show();
                             }
                         }
                     });

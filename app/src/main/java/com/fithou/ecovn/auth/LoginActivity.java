@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_create_new;
     TextView tv_forget_pass;
 
-    ImageView btn_login;
+    Button btn_login;
     FirebaseAuth auth;
     FirebaseFirestore firestore;
     ProgressDialog progressDialog;
@@ -42,8 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Create your account");
-        progressDialog.setMessage("Please wait !");
+        progressDialog.setTitle("Đăng nhập");
+        progressDialog.setMessage("Đang thực hiện !");
 
         btn_login = findViewById(R.id.btn_login);
         edtEmail = findViewById(R.id.edtEmailLogin);
@@ -55,10 +55,10 @@ public class LoginActivity extends AppCompatActivity {
                 String password = edtPassword.getText().toString();
 
                 if(email.isEmpty()){
-                    edtEmail.setError("Enter your email");
+                    edtEmail.setError("Hãy nhập email hợp lệ");
 
                 }else if(password.isEmpty()){
-                    edtPassword.setError("Enter your password");
+                    edtPassword.setError("Hãy nhập mật khẩu hợp lệ");
                 }else{
                     progressDialog.show();
                     auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

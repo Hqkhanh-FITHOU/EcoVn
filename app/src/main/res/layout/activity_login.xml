@@ -31,9 +31,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
-        android:text="Welcome \nto EcoVn"
+        android:text="Chào mừng \ntới EcoVn"
         android:textColor="@color/Free_Speech_Blue"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -44,9 +44,9 @@
         android:id="@+id/edtEmailLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="48dp"
         android:drawableStart="@drawable/email"
         android:drawablePadding="16dp"
         android:ems="10"
@@ -63,14 +63,14 @@
         android:id="@+id/edtPasswordLogin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="48dp"
         android:drawableStart="@drawable/password"
         android:drawablePadding="16dp"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="numberPassword"
+        android:hint="Mật khẩu"
+        android:inputType="textPassword"
         android:textColor="@color/black"
         android:textCursorDrawable="@color/Free_Speech_Blue"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,40 +78,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtEmailLogin" />
 
-    <ImageView
-        android:id="@+id/btn_login"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPasswordLogin"
-        app:srcCompat="@drawable/img_login" />
+<!--    <ImageView-->
+<!--        android:id="@+id/btn_login"-->
+<!--        android:layout_width="85dp"-->
+<!--        android:layout_height="85dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/edtPasswordLogin"-->
+<!--        app:srcCompat="@drawable/img_login" />-->
 
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:text="Đăng nhập"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/Free_Speech_Blue"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/border_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtPasswordLogin"
+        />
 
     <Button
         android:id="@+id/btn_new_register"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
+        android:background="@drawable/border_button"
         android:text="Tạo tài khoản mới"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/tvForgetPass" />
 
 
     <TextView
         android:id="@+id/tvForgetPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Quên mật khẩu"
+        android:text="Quên mật khẩu ?"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_new_register" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
