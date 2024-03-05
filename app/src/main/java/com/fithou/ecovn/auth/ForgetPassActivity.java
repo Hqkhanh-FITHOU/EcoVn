@@ -9,12 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fithou.ecovn.R;
-import com.fithou.ecovn.databinding.ActivityForgetPassBinding;
-import com.fithou.ecovn.databinding.ActivityRegisterBinding;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,15 +35,30 @@ public class ForgetPassActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Create your account");
         progressDialog.setMessage("Please wait !");
+
+        onResetPassword();
+    }
+
+    public boolean isEmailExists(String email) {
+        Boolean isValidEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail().equals(email);
+        return isValidEmail;
+    }
+
+
+    public void onResetPassword(){
+        UserInfo userInfo = FirebaseAuth.getInstance().getCurrentUser();
         btnSave = findViewById(R.id.btn_save);
         edtEmail = findViewById(R.id.edtEmailRegisterForget);
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = edtEmail.getText().toString();
                 if(email.isEmpty()){
                     edtEmail.setError("Enter your email");
-                }else{
+                }else if(!isEmailExists(email)){
+                    edtEmail.setError("Your email not exists, please check again your email !");
+                }else {
                     progressDialog.show();
                     auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
