@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/bottom_home"
-        android:title="Home"
+        android:title="Trang chủ"
         android:icon="@drawable/baseline_home_24" />
 
     <item
         android:id="@+id/bottom_cart"
-        android:title="Cart"
+        android:title="Giỏ hàng"
         android:icon="@drawable/baseline_shopping_cart_24" />
 
     <item
         android:id="@+id/bottom_notification"
-        android:title="Notification"
+        android:title="Thông báo"
         android:icon="@drawable/baseline_notifications_24" />
 
     <item
         android:id="@+id/bottom_account"
-        android:title="Account"
+        android:title="Tôi"
         android:icon="@drawable/baseline_manage_accounts_24" />
 </menu>
