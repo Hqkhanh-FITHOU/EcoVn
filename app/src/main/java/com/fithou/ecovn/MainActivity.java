@@ -19,7 +19,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
 import com.fithou.ecovn.R.id;
 public class MainActivity extends AppCompatActivity {
-    TabLayout tabLayout;
+//    TabLayout tabLayout;
     ViewPager2 viewPager2;
     ViewPagerAdapter viewPagerAdapter;
     BottomNavigationView bottomNavigationView;
@@ -29,46 +29,46 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tabLayout = findViewById(R.id.tabLayout);
+//        tabLayout = findViewById(R.id.tabLayout);
         viewPager2 = findViewById(R.id.viewPager2);
         viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(viewPagerAdapter);
         bottomNavigationView = findViewById(R.id.bottomNav);
         frameLayout = findViewById(R.id.frameLayout);
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager2.setVisibility(View.VISIBLE);
-                frameLayout.setVisibility(View.GONE);
-                viewPager2.setCurrentItem(tab.getPosition());
+//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                viewPager2.setVisibility(View.VISIBLE);
+//                frameLayout.setVisibility(View.GONE);
+//                viewPager2.setCurrentItem(tab.getPosition());
+//
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//                viewPager2.setVisibility(View.VISIBLE);
+//                frameLayout.setVisibility(View.GONE);
+//            }
+//        });
 
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                viewPager2.setVisibility(View.VISIBLE);
-                frameLayout.setVisibility(View.GONE);
-            }
-        });
-
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                switch (position){
-                    case 0:
-                    case 1:
-                    case 2:
-                        tabLayout.getTabAt(position).select();
-                }
-                super.onPageSelected(position);
-            }
-        });
+//        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                switch (position){
+//                    case 0:
+//                    case 1:
+//                    case 2:
+//                        tabLayout.getTabAt(position).select();
+//                }
+//                super.onPageSelected(position);
+//            }
+//        });
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

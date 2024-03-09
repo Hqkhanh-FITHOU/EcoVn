@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/chat_menu_item_toolbar"
+        android:title="Chat"
+        android:icon="@drawable/baseline_chat_bubble_24"
+        app:showAsAction="always"
+        android:iconTint="@color/Free_Speech_Blue"/>
+
+    <item
+        android:id="@+id/QR_menu_item_toolbar"
+        android:title="QR"
+        android:icon="@drawable/round_qr_code_24"
+        app:showAsAction="always"
+        android:iconTint="@color/Free_Speech_Blue"/>
+
+</menu>
