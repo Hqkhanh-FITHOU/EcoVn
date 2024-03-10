@@ -3,12 +3,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".menu.AccountMenu">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Account" />
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/account_toobar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menu="@menu/account_appbar_menu"
+                android:paddingBottom="18dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/user_img"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@mipmap/ic_launcher"/>
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tên tài khoản"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_toRightOf="@+id/user_img"
+                        android:textColor="@color/Free_Speech_Blue"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:id="@+id/text_follower"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Theo dõi: 0"
+                        android:layout_toRightOf="@+id/user_img"
+                        android:layout_below="@+id/user_name"
+                        android:textSize="10sp"
+                        android:layout_marginRight="3dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/text_following"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/user_name"
+                        android:layout_marginStart="3dp"
+                        android:layout_toRightOf="@+id/text_follower"
+                        android:text="|   Đang theo dõi: 0"
+                        android:textSize="10sp" />
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+            <RelativeLayout
+                android:layout_below="@+id/account_toobar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/account_feature_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/account_list_item"
+                    tools:itemCount="2"
+                    />
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+    </ScrollView>
 
 </FrameLayout>

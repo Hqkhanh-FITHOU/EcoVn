@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.fithou.ecovn.model.authModels;
 import com.fithou.ecovn.MainActivity;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.databinding.ActivityLoginBinding;
@@ -25,12 +25,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
+
 public class LoginActivity extends AppCompatActivity {
+
     Button btn_create_new;
     TextView tv_forget_pass;
 
     Button btn_login;
     FirebaseAuth auth;
+    authModels user = new authModels();
     FirebaseFirestore firestore;
     ProgressDialog progressDialog;
 
@@ -66,7 +70,13 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 progressDialog.dismiss();
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                user.setId(auth.getCurrentUser().getUid());
+                                user.setName(auth.getCurrentUser().getDisplayName());
+                                user.setEmail(auth.getCurrentUser().getEmail());
+                                user.setPassword(password);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("user", user);
+                                startActivity(intent);
                                 finish();
                             }else{
                                 progressDialog.dismiss();

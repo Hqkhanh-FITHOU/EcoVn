@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-
+import com.fithou.ecovn.model.authModels;
 import com.fithou.ecovn.adapter.ViewPagerAdapter;
 import com.fithou.ecovn.menu.AccountMenu;
 import com.fithou.ecovn.menu.CartMenu;
@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     FrameLayout frameLayout;
 
+    public static authModels CURRENT_USER;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.setAdapter(viewPagerAdapter);
         bottomNavigationView = findViewById(R.id.bottomNav);
         frameLayout = findViewById(R.id.frameLayout);
-
+        CURRENT_USER = (authModels) getIntent().getSerializableExtra("user");
 //        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 //            @Override
 //            public void onTabSelected(TabLayout.Tab tab) {
@@ -92,4 +94,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

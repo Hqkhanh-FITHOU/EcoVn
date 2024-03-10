@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
@@ -73,11 +74,11 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-
+                                auth.updateCurrentUser(task.getResult().getUser());
                                 String id = task.getResult().getUser().getUid();
                                 authModels authModels = new authModels(id, name, email, password);
 
-                                DocumentReference documentReference =   firestore.collection("users").document();
+                                DocumentReference documentReference =   firestore.collection("users").document(id);
 
                                 documentReference.set(authModels, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -86,10 +87,17 @@ public class RegisterActivity extends AppCompatActivity {
                                            documentReference.set(authModels, SetOptions.merge()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                @Override
                                                public void onComplete(@NonNull Task<Void> task) {
-                                                   progressDialog.dismiss();
-                                                   Toast.makeText(RegisterActivity.this, "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
-                                                   startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-
+                                                   UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
+                                                   auth.getCurrentUser().updateProfile(profileUpdate).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                       @Override
+                                                       public void onComplete(@NonNull Task<Void> task) {
+                                                           if(task.isSuccessful()){
+                                                               progressDialog.dismiss();
+                                                               Toast.makeText(RegisterActivity.this, "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
+                                                               startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                                           }
+                                                       }
+                                                   });
                                                }
                                            }).addOnFailureListener(new OnFailureListener() {
                                                @Override
