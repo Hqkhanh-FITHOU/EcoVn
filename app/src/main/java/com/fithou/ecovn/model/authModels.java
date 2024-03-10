@@ -1,6 +1,8 @@
 package com.fithou.ecovn.model;
 
-public class authModels {
+import java.io.Serializable;
+
+public class authModels implements Serializable {
     String Id;
     String name;
     String email;
