@@ -15,8 +15,7 @@ import android.widget.Toast;
 import com.fithou.ecovn.model.authModels;
 import com.fithou.ecovn.MainActivity;
 import com.fithou.ecovn.R;
-import com.fithou.ecovn.databinding.ActivityLoginBinding;
-import com.fithou.ecovn.databinding.ActivityRegisterBinding;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

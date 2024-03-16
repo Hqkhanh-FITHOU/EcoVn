@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +40,15 @@ public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAd
         }
         holder.icon_feature.setImageResource(feature.getFeature_icon());
         holder.feature_name.setText(feature.getFeature_name());
+
+
+        holder.feature_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Xử lý sự kiện click item
+                Toast.makeText(view.getContext(), holder.feature_name.getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -51,11 +62,15 @@ public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAd
     public class AccountFeatureViewHolder extends RecyclerView.ViewHolder{
         private ImageView icon_feature;
         private TextView feature_name;
+
+        private RelativeLayout feature_layout;
         public AccountFeatureViewHolder(@NonNull View itemView) {
             super(itemView);
             icon_feature = itemView.findViewById(R.id.account_feature_icon);
             feature_name = itemView.findViewById(R.id.account_feature_name);
+            feature_layout = itemView.findViewById(R.id.account_feature_layout);
         }
+
 
 
     }
