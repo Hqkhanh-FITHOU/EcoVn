@@ -3,6 +3,7 @@ package com.fithou.ecovn.menu;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,7 +51,11 @@ public class AccountMenu extends Fragment {
     private List<AccountFeatureViewModel> initData(){
         List<AccountFeatureViewModel> list = new ArrayList<>();
         list.add(new AccountFeatureViewModel(1,R.drawable.round_event_note_24, "Đơn mua"));
+        list.add(new AccountFeatureViewModel(2,R.drawable.wallet, "Tiện ích"));
+        list.add(new AccountFeatureViewModel(2,R.drawable.round_store_24, "Cửa hàng của tôi"));
         list.add(new AccountFeatureViewModel(2,R.drawable.round_star_24, "Đánh giá của tôi"));
+        list.add(new AccountFeatureViewModel(2,R.drawable.round_settings_24, "Thiết lập tài khoản"));
+        list.add(new AccountFeatureViewModel(2,R.drawable.round_help_24, "Trung tâm trợ giúp"));
         return list;
     }
 

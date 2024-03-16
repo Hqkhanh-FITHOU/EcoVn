@@ -41,25 +41,15 @@
                         android:textColor="@color/Free_Speech_Blue"
                         android:textStyle="bold"
                         />
-                    <TextView
-                        android:id="@+id/text_follower"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Theo dõi: 0"
-                        android:layout_toRightOf="@+id/user_img"
-                        android:layout_below="@+id/user_name"
-                        android:textSize="10sp"
-                        android:layout_marginRight="3dp"
-                        />
+
 
                     <TextView
                         android:id="@+id/text_following"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/user_name"
-                        android:layout_marginStart="3dp"
-                        android:layout_toRightOf="@+id/text_follower"
-                        android:text="|   Đang theo dõi: 0"
+                        android:layout_toRightOf="@+id/user_img"
+                        android:text="Đang theo dõi: 0"
                         android:textSize="10sp" />
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
