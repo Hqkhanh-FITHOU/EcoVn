@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,7 +23,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
     private Context context;
     private List<ProductsModel> productsModels;
-
+    private ProductsModel.OnProductClickListener onProductClickListener;
 
     @NonNull
     @Override
@@ -37,6 +39,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
     public void setViewData(List<ProductsModel> mProductsModels){
         productsModels = mProductsModels;
+    }
+
+    public void setOnProductClickListener(ProductsModel.OnProductClickListener listener) {
+        onProductClickListener = listener;
     }
 
     @Override
@@ -60,6 +66,15 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
         holder.name.setText(productsModel.getName());
         holder.cost.setText(productsModel.getCost().toString());
+
+        holder.product_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onProductClickListener != null) {
+                        onProductClickListener.onProductClick(productsModel);
+                }
+            }
+        });
     }
 
     @Override
@@ -74,12 +89,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         private ImageView img_product;
         private TextView name;
         private TextView cost;
-
+        private LinearLayout product_layout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img_product = itemView.findViewById(R.id.img_products);
             name = itemView.findViewById(R.id.name_products);
             cost = itemView.findViewById(R.id.cost_products);
+            product_layout = itemView.findViewById(R.id.product_layout);
 
         }
     }
