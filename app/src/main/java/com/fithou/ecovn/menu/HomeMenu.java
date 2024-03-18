@@ -95,11 +95,15 @@ public class HomeMenu extends Fragment {
         productRecyclerView.setAdapter(productsAdapter);
 
         loadTitleProductsFromFirebase();
-        onClickSeeMore();
+        onClickSeeMoreCategories();
         return view;
     }
 
-    private void onClickSeeMore(){
+
+
+
+
+    private void onClickSeeMoreCategories(){
         tvSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +113,11 @@ public class HomeMenu extends Fragment {
             }
         });
     }
+
+
+
+
+
     private void loadTitleProductsFromFirebase() {
         firestore.collection("category")
                 .get()

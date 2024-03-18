@@ -37,7 +37,7 @@
             <ImageView
                 android:id="@+id/logo_home"
                 android:layout_width="wrap_content"
-                android:layout_height="70dp"
+                android:layout_height="90dp"
                 android:layout_below="@+id/home_toolbar"
                 android:src="@drawable/logo_login"
                 android:background="@color/white"
@@ -47,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
+
                 android:layout_below="@+id/logo_home">
 
                 <TextView
@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:paddingLeft="16dp"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/Free_Speech_Blue"
                     android:text="Danh mục" />
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:paddingRight="16dp"
-                    android:textSize="16dp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@color/Free_Speech_Blue"
                     android:text="Xem thêm" />
@@ -84,8 +84,8 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:padding="8dp"
-                    android:scrollbars="horizontal"
-                    tools:itemCount="10"
+                    android:scrollbars="none"
+                    tools:itemCount="6"
                     tools:listitem="@layout/category_list" />
             </RelativeLayout>
 
@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:text="Ưu đãi"
                         android:paddingLeft="16dp"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/Free_Speech_Blue"/>
                 <androidx.recyclerview.widget.RecyclerView
@@ -112,7 +112,8 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:padding="8dp"
-                    android:scrollbars="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    android:scrollbars="none"
                     tools:itemCount="5"
                     tools:listitem="@layout/discount_list_item" />
                 </LinearLayout>
@@ -130,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:padding="8dp"
-                    android:scrollbars="vertical"
+                    android:scrollbars="none"
                     tools:itemCount="10"
                     tools:listitem="@layout/products_list_item" />
             </RelativeLayout>

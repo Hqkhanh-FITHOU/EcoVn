@@ -21,7 +21,7 @@ public class authModels implements Serializable {
 
     String image = "";
 
-    boolean isShop = false;
+    boolean is_shop = false;
 
     public authModels(String Id, String name, String email, String password) {
         this.Id = Id;
@@ -75,11 +75,11 @@ public class authModels implements Serializable {
     }
 
     public boolean isShop() {
-        return isShop;
+        return is_shop;
     }
 
     public void setShop(boolean shop) {
-        isShop = shop;
+        is_shop = shop;
     }
 
     public String getId() {
