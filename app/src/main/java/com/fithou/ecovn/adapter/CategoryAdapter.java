@@ -16,6 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.model.CategoryModel;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
 
@@ -48,14 +49,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         if (context == null) {
             Log.e("Glide Error", "Context is null");
         } else {
-            int radius = 8; // Radius of the rounded corners
-            RequestOptions requestOptions = RequestOptions
-                    .bitmapTransform(new RoundedCorners(radius))
-                    .override(300, 300); // Optional: set the size of the image
+//            int radius = 8; // Radius of the rounded corners
+//            RequestOptions requestOptions = RequestOptions
+//                    .bitmapTransform(new RoundedCorners(radius))
+//                    .override(300, 300); // Optional: set the size of the image
             // Load image with Glide
             Glide.with(context)
                     .load(categoryModel.getImg())
-                    .apply(requestOptions)
+//                    .apply(requestOptions)
                     .placeholder(R.drawable.logo)
                     .centerCrop()
                     .error(R.drawable.baseline_error_outline_24)
@@ -75,7 +76,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imageView;
+        private ShapeableImageView imageView;
         private TextView textView;
 
         public ViewHolder(@NonNull View itemView) {

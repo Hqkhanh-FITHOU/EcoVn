@@ -4,6 +4,6 @@
     <solid android:color="@android:color/transparent" />
     <stroke
         android:width="2dp"
-        android:color="@color/Free_Speech_Blue" />
+        android:color="@color/Bottom_navigation_text_inactive" />
     <corners android:radius="8dp" />
 </shape>

@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.model.product.ProductsModel;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder>{
@@ -24,6 +23,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     private Context context;
     private List<ProductsModel> productsModels;
     private ProductsModel.OnProductClickListener onProductClickListener;
+
 
     @NonNull
     @Override
@@ -65,16 +65,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         }
 
         holder.name.setText(productsModel.getName());
-        holder.cost.setText(productsModel.getCost().toString());
-
-        holder.product_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onProductClickListener != null) {
-                        onProductClickListener.onProductClick(productsModel);
-                }
-            }
-        });
+        holder.cost.setText(formatCurrency(productsModel.getCost()));
     }
 
     @Override
@@ -89,14 +80,45 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         private ImageView img_product;
         private TextView name;
         private TextView cost;
-        private LinearLayout product_layout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img_product = itemView.findViewById(R.id.img_products);
             name = itemView.findViewById(R.id.name_products);
             cost = itemView.findViewById(R.id.cost_products);
-            product_layout = itemView.findViewById(R.id.product_layout);
 
         }
+    }
+
+
+    private String formatCurrency(double c) {
+        DecimalFormat decimalFormat = null;
+        if(c >= 1000){
+            decimalFormat = new DecimalFormat("#,###");
+        }
+        if(c >= 10000){
+            decimalFormat = new DecimalFormat("##,###");
+        }
+        if(c >= 100000){
+            decimalFormat = new DecimalFormat("###,###");
+        }
+        if(c >= 1000000){
+            decimalFormat = new DecimalFormat("#,###,###");
+        }
+        if(c >= 1000000){
+            decimalFormat = new DecimalFormat("#,###,###");
+        }
+        if(c >= 10000000){
+            decimalFormat = new DecimalFormat("##,###,###");
+        }
+        if(c >= 100000000){
+            decimalFormat = new DecimalFormat("###,###,###");
+        }
+
+        if(decimalFormat == null){
+            return c+"đ";
+        }
+
+        return decimalFormat.format(c) + "đ";
     }
 }

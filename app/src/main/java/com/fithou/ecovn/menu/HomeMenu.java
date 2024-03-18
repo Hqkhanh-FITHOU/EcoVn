@@ -95,7 +95,6 @@ public class HomeMenu extends Fragment {
         productRecyclerView.setLayoutManager(gridLayoutProductManager);
         productRecyclerView.setAdapter(productsAdapter);
 
-
         loadTitleProductsFromFirebase();
         onClickSeeMore();
         onClickProduct();
@@ -122,6 +121,10 @@ public class HomeMenu extends Fragment {
             Toast.makeText(getContext(), product.getName(), Toast.LENGTH_SHORT).show();
         });
     }
+
+
+
+
     private void loadTitleProductsFromFirebase() {
         firestore.collection("category")
                 .get()
