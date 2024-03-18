@@ -5,6 +5,7 @@
     android:layout_marginHorizontal="8dp"
     android:layout_marginBottom="8dp"
     android:background="@drawable/rounded_border"
+    android:id="@+id/product_layout"
     >
     <LinearLayout
         android:layout_width="match_parent"
