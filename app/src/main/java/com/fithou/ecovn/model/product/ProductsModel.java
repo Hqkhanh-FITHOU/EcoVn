@@ -14,51 +14,33 @@ public class ProductsModel implements Parcelable {
     private Double cost;
 
     private  String img;
-    private String FK_title_product_id;
+    private String FK_category_id;
     private String FK_shop_id;
+
+    private int quantity;
+
+    private String unit;
+
+    private String container_type;
 
     private List<Comment> commentList;
 
     public ProductsModel() {
     }
 
-    public ProductsModel(String product_id, String name, String des, Double cost, String img, String FK_title_product_id, String FK_shop_id, List<Comment> comment) {
+    public ProductsModel(String product_id, String name, String des, Double cost, String img, String FK_category_id, String FK_shop_id, int quantity, String unit, String container_type, List<Comment> commentList) {
         this.product_id = product_id;
         this.name = name;
         this.des = des;
         this.cost = cost;
         this.img = img;
-        this.FK_title_product_id = FK_title_product_id;
+        this.FK_category_id = FK_category_id;
         this.FK_shop_id = FK_shop_id;
-        this.commentList = comment;
+        this.quantity = quantity;
+        this.unit = unit;
+        this.container_type = container_type;
+        this.commentList = commentList;
     }
-
-
-    protected ProductsModel(Parcel in) {
-        product_id = in.readString();
-        name = in.readString();
-        des = in.readString();
-        if (in.readByte() == 0) {
-            cost = null;
-        } else {
-            cost = in.readDouble();
-        }
-        img = in.readString();
-        FK_title_product_id = in.readString();
-        FK_shop_id = in.readString();
-    }
-
-    public static final Creator<ProductsModel> CREATOR = new Creator<ProductsModel>() {
-        @Override
-        public ProductsModel createFromParcel(Parcel in) {
-            return new ProductsModel(in);
-        }
-
-        @Override
-        public ProductsModel[] newArray(int size) {
-            return new ProductsModel[size];
-        }
-    };
 
     public String getProduct_id() {
         return product_id;
@@ -100,12 +82,12 @@ public class ProductsModel implements Parcelable {
         this.img = img;
     }
 
-    public String getFK_title_product_id() {
-        return FK_title_product_id;
+    public String getFK_category_id() {
+        return FK_category_id;
     }
 
-    public void setFK_title_product_id(String FK_title_product_id) {
-        this.FK_title_product_id = FK_title_product_id;
+    public void setFK_category_id(String FK_category_id) {
+        this.FK_category_id = FK_category_id;
     }
 
     public String getFK_shop_id() {
@@ -116,6 +98,30 @@ public class ProductsModel implements Parcelable {
         this.FK_shop_id = FK_shop_id;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getContainer_type() {
+        return container_type;
+    }
+
+    public void setContainer_type(String container_type) {
+        this.container_type = container_type;
+    }
+
     public List<Comment> getComment() {
         return commentList;
     }
@@ -124,6 +130,34 @@ public class ProductsModel implements Parcelable {
         this.commentList = comment;
     }
 
+    protected ProductsModel(Parcel in) {
+        product_id = in.readString();
+        name = in.readString();
+        des = in.readString();
+        if (in.readByte() == 0) {
+            cost = null;
+        } else {
+            cost = in.readDouble();
+        }
+        img = in.readString();
+        FK_category_id = in.readString();
+        FK_shop_id = in.readString();
+        quantity = in.readInt();
+        unit = in.readString();
+        container_type = in.readString();
+    }
+
+    public static final Creator<ProductsModel> CREATOR = new Creator<ProductsModel>() {
+        @Override
+        public ProductsModel createFromParcel(Parcel in) {
+            return new ProductsModel(in);
+        }
+
+        @Override
+        public ProductsModel[] newArray(int size) {
+            return new ProductsModel[size];
+        }
+    };
 
     @Override
     public int describeContents() {
@@ -142,7 +176,17 @@ public class ProductsModel implements Parcelable {
             parcel.writeDouble(cost);
         }
         parcel.writeString(img);
-        parcel.writeString(FK_title_product_id);
+        parcel.writeString(FK_category_id);
         parcel.writeString(FK_shop_id);
+        parcel.writeInt(quantity);
+        parcel.writeString(unit);
+        parcel.writeString(container_type);
     }
+
+
+    public interface OnProductClickListener {
+        void onProductClick(ProductsModel product);
+    }
+
+
 }
