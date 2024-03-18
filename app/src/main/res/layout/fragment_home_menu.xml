@@ -20,21 +20,120 @@
                 android:id="@+id/home_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:menu="@menu/home_appbar_menu"
-                >
+                app:menu="@menu/home_appbar_menu">
+
                 <ImageView
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:src="@drawable/logo"
-                    android:scaleType="fitXY"
                     android:layout_marginRight="3dp"
-                    />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logo" />
+
                 <androidx.appcompat.widget.SearchView
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:background="@drawable/border_search_home_toolbar"/>
+                    android:background="@drawable/border_search_home_toolbar" />
             </androidx.appcompat.widget.Toolbar>
+            <ImageView
+                android:id="@+id/logo_home"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_below="@+id/home_toolbar"
+                android:src="@drawable/logo_login"
+                android:background="@color/white"
+                />
+            <FrameLayout
+                android:id="@+id/layout_under_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp"
+                android:layout_below="@+id/logo_home">
 
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:paddingLeft="16dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/Free_Speech_Blue"
+                    android:text="Danh mục" />
+
+                <TextView
+                    android:id="@+id/tv_seemore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:paddingRight="16dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/Free_Speech_Blue"
+                    android:text="Xem thêm" />
+            </FrameLayout>
+            <RelativeLayout
+                android:id="@id/layout_category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layout_under_toolbar">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/category_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:padding="8dp"
+                    android:scrollbars="horizontal"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/category_list" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout_discount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layout_category">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ưu đãi"
+                        android:paddingLeft="16dp"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/Free_Speech_Blue"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/discount_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:padding="8dp"
+                    android:scrollbars="horizontal"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/discount_list_item" />
+                </LinearLayout>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/layout_product"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layout_discount">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/products_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:padding="8dp"
+                    android:scrollbars="vertical"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/products_list_item" />
+            </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
 

@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="140dp"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/rounded_border"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:padding="5dp">
+        <ImageView
+            android:id="@+id/img_products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:src="@drawable/logo_login"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <TextView
+        android:id="@+id/name_products"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên sản phẩm"
+        android:textColor="@color/Free_Speech_Blue"
+        android:textSize="16sp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:paddingLeft="8dp"
+       />
+
+    <TextView
+        android:id="@+id/cost_products"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Giá cả"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:ellipsize="end"
+        android:paddingLeft="8dp"
+        android:singleLine="true"/>
+    </LinearLayout>
+
+</LinearLayout>

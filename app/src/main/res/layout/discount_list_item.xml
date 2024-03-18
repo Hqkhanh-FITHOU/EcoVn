@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="70dp"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/rounded_border"
+    >
+    <TextView
+        android:id="@+id/title_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tiêu đề"
+        android:textColor="@color/Free_Speech_Blue"
+        android:textSize="16sp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"/>
+
+    <TextView
+        android:id="@+id/des_discount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mô tả"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:ellipsize="end"
+        android:paddingLeft="8dp"
+        android:singleLine="true"/>
+</LinearLayout>
