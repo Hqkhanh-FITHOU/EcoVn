@@ -22,6 +22,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
     private Context context;
     private List<ProductsModel> productsModels;
+    private ProductsModel.OnProductClickListener onProductClickListener;
 
 
     @NonNull
@@ -38,6 +39,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
     public void setViewData(List<ProductsModel> mProductsModels){
         productsModels = mProductsModels;
+    }
+
+    public void setOnProductClickListener(ProductsModel.OnProductClickListener listener) {
+        onProductClickListener = listener;
     }
 
     @Override
