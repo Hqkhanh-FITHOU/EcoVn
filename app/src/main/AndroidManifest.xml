@@ -13,6 +13,9 @@
         android:theme="@style/Theme.EcoVn"
         tools:targetApi="31">
         <activity
+            android:name=".sub_activity.SeeMoreCategory"
+            android:exported="false" />
+        <activity
             android:name=".auth.ForgetPassActivity"
             android:exported="false" />
         <activity

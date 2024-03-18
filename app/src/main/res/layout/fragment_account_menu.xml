@@ -65,9 +65,6 @@
                     tools:itemCount="2"
                     />
             </RelativeLayout>
-
-
-
         </RelativeLayout>
     </ScrollView>
 
