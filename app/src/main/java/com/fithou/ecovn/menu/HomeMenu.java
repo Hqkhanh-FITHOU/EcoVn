@@ -24,7 +24,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.fithou.ecovn.R;
@@ -97,7 +96,6 @@ public class HomeMenu extends Fragment {
 
         loadTitleProductsFromFirebase();
         onClickSeeMore();
-        onClickProduct();
         return view;
     }
 
@@ -118,7 +116,7 @@ public class HomeMenu extends Fragment {
 //            intent.putExtra("PRODUCT_ID", product);
 //            // Gửi các thông tin khác của sản phẩm nếu cần
 //            startActivity(intent);
-            Toast.makeText(getContext(), product.getName(), Toast.LENGTH_SHORT).show();
+
         });
     }
 
