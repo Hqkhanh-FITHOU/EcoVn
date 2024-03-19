@@ -36,6 +36,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -116,7 +117,7 @@ public class HomeMenu extends Fragment {
     private void onClickProduct(){
         productsAdapter.setOnProductClickListener(product -> {
             Intent intent = new Intent(getContext(), ProductDetailActivity.class);
-            intent.putExtra("PRODUCT_ID", product);
+            intent.putExtra("PRODUCT_ID", (Serializable) product);
             // Gửi các thông tin khác của sản phẩm nếu cần
             startActivity(intent);
         });
