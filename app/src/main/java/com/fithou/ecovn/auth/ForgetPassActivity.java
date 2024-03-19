@@ -72,6 +72,7 @@ public class ForgetPassActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 Toast.makeText(ForgetPassActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             }
+
                         }
                     });
                 }

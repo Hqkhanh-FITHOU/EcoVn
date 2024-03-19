@@ -96,8 +96,10 @@ public class RegisterActivity extends AppCompatActivity {
                                                                Toast.makeText(RegisterActivity.this, "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
                                                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                                            }
+
                                                        }
                                                    });
+
                                                }
                                            }).addOnFailureListener(new OnFailureListener() {
                                                @Override
@@ -107,6 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                }
                                            });
                                         }
+
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
@@ -118,6 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 Toast.makeText(RegisterActivity.this, "Đăng ký thất bại !", Toast.LENGTH_LONG).show();
                             }
+
                         }
                     });
                 }

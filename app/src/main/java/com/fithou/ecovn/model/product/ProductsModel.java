@@ -5,9 +5,10 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ProductsModel implements Parcelable {
+public class ProductsModel implements Parcelable, Serializable {
     private String product_id;
     private String name;
     private String des;

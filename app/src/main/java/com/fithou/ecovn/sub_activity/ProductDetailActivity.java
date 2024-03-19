@@ -3,13 +3,21 @@ package com.fithou.ecovn.sub_activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.fithou.ecovn.R;
+import com.fithou.ecovn.model.product.ProductsModel;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.DecimalFormat;
 
 public class ProductDetailActivity extends AppCompatActivity {
     ImageView img_product_detail;
@@ -24,19 +32,34 @@ public class ProductDetailActivity extends AppCompatActivity {
     ImageView btn_back_product_detail, share_btn;
 
     RecyclerView comment_recycleview;
+
+
+    FirebaseFirestore db;
+    ProductsModel product;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
-
+        Intent intent  = getIntent();
         initializeViewComponent();
         onClickBack();
-        loadComments();
+        product = (ProductsModel) intent.getSerializableExtra("PRODUCT_ID");
+        loadContentView(product);
     }
 
-    private void loadComments() {
+    private void loadContentView(ProductsModel product) {
+        Glide.with(this)
+                .load(product.getImg())
+                .into(img_product_detail);
 
+        name_product_detail.setText(product.getName());
+        price_product_detail.setText(formatCurrency(product.getCost()));
+        quantity_product_detail.setText(product.getQuantity()+"");
+        unit_product_detail.setText(product.getUnit() + " /");
+        container_type_product_detail.setText(" "+product.getContainer_type());
+        description_product_detail.setText(product.getDes());
     }
+
 
     private void onClickBack() {
         btn_back_product_detail.setOnClickListener(view -> {
@@ -61,5 +84,34 @@ public class ProductDetailActivity extends AppCompatActivity {
         comment_recycleview = findViewById(R.id.comment_recycleview);
     }
 
+    private String formatCurrency(double c) {
+        DecimalFormat decimalFormat = null;
+        if(c >= 1000){
+            decimalFormat = new DecimalFormat("#,###");
+        }
+        if(c >= 10000){
+            decimalFormat = new DecimalFormat("##,###");
+        }
+        if(c >= 100000){
+            decimalFormat = new DecimalFormat("###,###");
+        }
+        if(c >= 1000000){
+            decimalFormat = new DecimalFormat("#,###,###");
+        }
+        if(c >= 1000000){
+            decimalFormat = new DecimalFormat("#,###,###");
+        }
+        if(c >= 10000000){
+            decimalFormat = new DecimalFormat("##,###,###");
+        }
+        if(c >= 100000000){
+            decimalFormat = new DecimalFormat("###,###,###");
+        }
 
+        if(decimalFormat == null){
+            return c+"";
+        }
+
+        return decimalFormat.format(c);
+    }
 }
