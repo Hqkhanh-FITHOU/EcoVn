@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -66,6 +67,15 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
         holder.name.setText(productsModel.getName());
         holder.cost.setText(formatCurrency(productsModel.getCost()));
+
+        holder.product_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onProductClickListener != null) {
+                    onProductClickListener.onProductClick(productsModel);
+                }
+            }
+        });
     }
 
     @Override
@@ -81,12 +91,14 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         private TextView name;
         private TextView cost;
 
+        private CardView product_layout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             img_product = itemView.findViewById(R.id.img_products);
             name = itemView.findViewById(R.id.name_products);
             cost = itemView.findViewById(R.id.cost_products);
-
+            product_layout = itemView.findViewById(R.id.product_layout);
         }
     }
 

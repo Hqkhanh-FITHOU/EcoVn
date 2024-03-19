@@ -36,7 +36,7 @@ import java.util.List;
 
 public class AddProduct extends AppCompatActivity {
     private EditText productNameEditText, priceEditText, descriptionEditText;
-    private Spinner categorySpinner;
+    private Spinner categorySpinner, unitSpinner, containerTypeSpinner;
     private Button btnAddProduct, btnCancel, btnAddImage;
 
     private ImageView imgProduct;
@@ -49,7 +49,13 @@ public class AddProduct extends AppCompatActivity {
     private List<String> categoryTitlesList;
     private ArrayList<CategoryModel> categoryModelList;
 
+    private List<String> unitList;
+
+    private List<String> containetTypeList;
+
     private String categoryTemp;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +65,8 @@ public class AddProduct extends AppCompatActivity {
         priceEditText = findViewById(R.id.edt_cost);
         descriptionEditText = findViewById(R.id.edt_des);
         categorySpinner = findViewById(R.id.spin_category);
+        unitSpinner = findViewById(R.id.spin_unit);
+        containerTypeSpinner = findViewById(R.id.spin_container_type);
         imgProduct = findViewById(R.id.imgProduct);
         btnAddProduct = findViewById(R.id.btn_add);
         btnCancel = findViewById(R.id.btn_cancel);
@@ -81,6 +89,8 @@ public class AddProduct extends AppCompatActivity {
         });
 
         loadCategory();
+        loadUnit();
+        loadContainerType();
         onClickCategory();
 
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +159,32 @@ public class AddProduct extends AppCompatActivity {
                 finish(); // Finish the activity
             }
         });
+    }
+
+    private void loadContainerType() {
+        containetTypeList = new ArrayList<>();
+        containetTypeList.add("Túi");
+        containetTypeList.add("Bao");
+        containetTypeList.add("Tuýp");
+        containetTypeList.add("Lọ");
+        containetTypeList.add("Vỉ");
+        containetTypeList.add("Hộp");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, containetTypeList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        containerTypeSpinner.setAdapter(adapter);
+    }
+
+    private void loadUnit() {
+        unitList = new ArrayList<>();
+        unitList.add("g"); //gam
+        unitList.add("kg"); //ki lô gam
+        unitList.add("ml"); //mi li lít
+        unitList.add("l"); //lít
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, unitList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        unitSpinner.setAdapter(adapter);
     }
 
 
