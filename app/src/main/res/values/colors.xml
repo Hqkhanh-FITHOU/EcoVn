@@ -5,4 +5,6 @@
     <color name="Free_Speech_Blue">#3F51B5</color>
     <color name="Sauvignon_red">#F8EEEC</color>
     <color name="Bottom_navigation_text_inactive">#ABABAB</color>
+    <color name="rating_active">#FFCC54</color>
+
 </resources>

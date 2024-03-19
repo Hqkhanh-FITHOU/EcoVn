@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:layout_marginHorizontal="5dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:background="@color/Bottom_navigation_text_inactive"
+        android:layout_alignParentTop="true" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_user_comment"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="5dp"/>
+
+    <TextView
+        android:id="@+id/user_name_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/img_user_comment"
+        android:text="tên người dùng"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"/>
+
+    <RatingBar
+        android:id="@+id/rating_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/myRatingStyle"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_below="@+id/user_name_comment"
+        android:layout_toRightOf="@+id/img_user_comment"
+        android:rating="4"
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/content_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:layout_below="@+id/rating_comment"
+        android:layout_toRightOf="@+id/img_user_comment"
+        android:text="Sản phẩm rất tốt, rất hữu ích, okela"/>
+
+    <TextView
+        android:id="@+id/time_comment"
+        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/img_user_comment"
+        android:layout_below="@+id/content_comment"
+        android:text="13/03/2024 21:37"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="13dp"
+/>
+
+</RelativeLayout>

@@ -8,6 +8,7 @@ import com.fithou.ecovn.model.DiscountModel;
 import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
 import com.fithou.ecovn.sub_activity.AddProduct;
+import com.fithou.ecovn.sub_activity.ProductDetailActivity;
 import com.fithou.ecovn.sub_activity.SeeMoreCategory;
 
 import android.content.Context;
@@ -114,11 +115,10 @@ public class HomeMenu extends Fragment {
 
     private void onClickProduct(){
         productsAdapter.setOnProductClickListener(product -> {
-            Intent intent = new Intent(getContext(), AddProduct.class);
-            //intent.putExtra("PRODUCT_ID", product);
+            Intent intent = new Intent(getContext(), ProductDetailActivity.class);
+            intent.putExtra("PRODUCT_ID", product);
             // Gửi các thông tin khác của sản phẩm nếu cần
             startActivity(intent);
-
         });
     }
 
