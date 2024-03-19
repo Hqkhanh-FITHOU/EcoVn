@@ -7,6 +7,7 @@ import com.fithou.ecovn.model.CategoryModel;
 import com.fithou.ecovn.model.DiscountModel;
 import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
+import com.fithou.ecovn.sub_activity.AddProduct;
 import com.fithou.ecovn.sub_activity.SeeMoreCategory;
 
 import android.content.Context;
@@ -96,6 +97,7 @@ public class HomeMenu extends Fragment {
 
         loadTitleProductsFromFirebase();
         onClickSeeMore();
+        onClickProduct();
         return view;
     }
 
@@ -112,10 +114,10 @@ public class HomeMenu extends Fragment {
 
     private void onClickProduct(){
         productsAdapter.setOnProductClickListener(product -> {
-//            Intent intent = new Intent(HomeMenu.this, ProductDetailActivity.class);
-//            intent.putExtra("PRODUCT_ID", product);
-//            // Gửi các thông tin khác của sản phẩm nếu cần
-//            startActivity(intent);
+            Intent intent = new Intent(getContext(), AddProduct.class);
+            //intent.putExtra("PRODUCT_ID", product);
+            // Gửi các thông tin khác của sản phẩm nếu cần
+            startActivity(intent);
 
         });
     }
