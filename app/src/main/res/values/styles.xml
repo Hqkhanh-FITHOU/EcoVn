@@ -10,4 +10,9 @@
         <item name="cornerSize">3dp</item>
     </style>
 
+    <style name="myRatingStyle" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="android:colorControlNormal">@color/Bottom_navigation_text_inactive</item>
+        <item name="android:colorControlActivated">@color/rating_active</item>
+    </style>
+
 </resources>
