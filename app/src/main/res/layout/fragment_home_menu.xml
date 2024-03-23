@@ -9,6 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -30,6 +31,7 @@
                     android:src="@drawable/logo" />
 
                 <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_view"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:background="@drawable/border_search_home_toolbar" />

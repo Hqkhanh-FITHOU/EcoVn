@@ -13,6 +13,7 @@ import com.fithou.ecovn.R;
 import com.fithou.ecovn.adapter.SeeMoreCategoryAdapter;
 import com.fithou.ecovn.model.CategoryModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SeeMoreCategory extends AppCompatActivity {
@@ -38,6 +39,7 @@ public class SeeMoreCategory extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
 
         onBackScreen();
+        onClickCategory();
     }
 
     private void onBackScreen(){
@@ -46,6 +48,15 @@ public class SeeMoreCategory extends AppCompatActivity {
             public void onClick(View view) {
                 onBackPressed();
             }
+        });
+    }
+
+    private void onClickCategory(){
+        mAdapter.setOnCategoryClickListener(category -> {
+            Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra("CATEGORY_ID", (Serializable) category);
+            // Gửi các thông tin khác của sản phẩm nếu cần
+            startActivity(intent);
         });
     }
 }

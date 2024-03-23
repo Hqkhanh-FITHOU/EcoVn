@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +25,7 @@ public class SeeMoreCategoryAdapter  extends RecyclerView.Adapter<SeeMoreCategor
 
     private Context context;
     private List<CategoryModel> mCategoryModel;
-
+    private CategoryModel.OnCategoryClickListener onCategoryClickListener;
     public SeeMoreCategoryAdapter(Context context, List<CategoryModel> mCategoryModel) {
         this.context = context;
         this.mCategoryModel = mCategoryModel;
@@ -35,7 +37,9 @@ public class SeeMoreCategoryAdapter  extends RecyclerView.Adapter<SeeMoreCategor
         View view = LayoutInflater.from(context).inflate(R.layout.seemore_category_list_item,parent,false);
         return new ViewHolder(view);
     }
-
+    public void setOnCategoryClickListener(CategoryModel.OnCategoryClickListener listener) {
+        onCategoryClickListener = listener;
+    }
     @Override
     public void onBindViewHolder(@NonNull SeeMoreCategoryAdapter.ViewHolder holder, int position) {
         CategoryModel categoryModel = mCategoryModel.get(position);
@@ -59,6 +63,14 @@ public class SeeMoreCategoryAdapter  extends RecyclerView.Adapter<SeeMoreCategor
                     .into(holder.imageView);
         }
         holder.textView.setText(categoryModel.getTitle());
+        holder.layout_category_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onCategoryClickListener != null) {
+                    onCategoryClickListener.onCategoryClick(categoryModel);
+                }
+            }
+        });
     }
 
     @Override
@@ -73,10 +85,13 @@ public class SeeMoreCategoryAdapter  extends RecyclerView.Adapter<SeeMoreCategor
         private ImageView imageView;
         private TextView textView;
 
+        private RelativeLayout layout_category_list;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.img_category);
             textView = itemView.findViewById(R.id.category);
+            layout_category_list = itemView.findViewById(R.id.layout_category_list);
         }
     }
 }

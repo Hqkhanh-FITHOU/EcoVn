@@ -5,7 +5,11 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class CategoryModel implements Parcelable {
+import com.fithou.ecovn.model.product.ProductsModel;
+
+import java.io.Serializable;
+
+public class CategoryModel implements Parcelable, Serializable {
 
     private String id;
     private String img;
@@ -73,5 +77,9 @@ public class CategoryModel implements Parcelable {
         parcel.writeString(id);
         parcel.writeString(img);
         parcel.writeString(title);
+    }
+
+    public interface OnCategoryClickListener {
+        void onCategoryClick(CategoryModel category);
     }
 }

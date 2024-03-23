@@ -17,6 +17,9 @@
         android:theme="@style/Theme.EcoVn"
         tools:targetApi="31">
         <activity
+            android:name=".sub_activity.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".sub_activity.ProductDetailActivity"
             android:exported="false" />
         <activity
