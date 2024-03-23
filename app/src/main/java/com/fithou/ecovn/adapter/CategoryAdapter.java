@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +18,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.model.CategoryModel;
+import com.fithou.ecovn.model.product.ProductsModel;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
@@ -23,6 +26,8 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder>{
     private Context context;
     private List<CategoryModel> mCategoryModel;
+
+    private CategoryModel.OnCategoryClickListener onCategoryClickListener;
 
     @NonNull
     @Override
@@ -39,7 +44,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void setViewData(List<CategoryModel> categoryModels){
         mCategoryModel = categoryModels;
     }
-
+    public void setOnCategoryClickListener(CategoryModel.OnCategoryClickListener listener) {
+        onCategoryClickListener = listener;
+    }
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
         CategoryModel categoryModel = mCategoryModel.get(position);
@@ -65,6 +72,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         Log.d("img", categoryModel.getImg());
         holder.textView.setText(categoryModel.getTitle());
+        holder.category_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onCategoryClickListener != null) {
+                    onCategoryClickListener.onCategoryClick(categoryModel);
+                }
+            }
+        });
     }
 
     @Override
@@ -78,11 +93,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ShapeableImageView imageView;
         private TextView textView;
+        private LinearLayout category_layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.category_img);
             textView = itemView.findViewById(R.id.category);
+            category_layout = itemView.findViewById(R.id.category_list);
         }
     }
 }

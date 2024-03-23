@@ -9,6 +9,7 @@ import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
 import com.fithou.ecovn.sub_activity.AddProduct;
 import com.fithou.ecovn.sub_activity.ProductDetailActivity;
+import com.fithou.ecovn.sub_activity.SearchActivity;
 import com.fithou.ecovn.sub_activity.SeeMoreCategory;
 
 import android.content.Context;
@@ -16,16 +17,20 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.fithou.ecovn.R;
@@ -54,10 +59,14 @@ public class HomeMenu extends Fragment {
     ArrayList<CategoryModel> categoryModelList;
     ArrayList<DiscountModel> discountModelList;
 
-    ArrayList<ProductsModel> productsModelList;
+    ArrayList<ProductsModel> productsModelList, listTemp;
 
     TextView tvSeeMore;
     private Context context;
+
+    private ScrollView scrollView;
+
+    androidx.appcompat.widget.SearchView searchView;
     public HomeMenu() {
         // Required empty public constructor
     }
@@ -75,6 +84,10 @@ public class HomeMenu extends Fragment {
         firestore = FirebaseFirestore.getInstance();
 
         tvSeeMore = view.findViewById(R.id.tv_seemore);
+        scrollView = view.findViewById(R.id.scroll_view);
+
+        searchView = view.findViewById(R.id.search_view);
+
 
         categoryModelList = new ArrayList<>();
         categoryAdapter = new CategoryAdapter(getContext(),categoryModelList);
@@ -97,9 +110,14 @@ public class HomeMenu extends Fragment {
         productRecyclerView.setLayoutManager(gridLayoutProductManager);
         productRecyclerView.setAdapter(productsAdapter);
 
-        loadTitleProductsFromFirebase();
+        loadCategoryFromFirebase();
+        loadDiscountFromFirebase();
+        loadProductFromFirebase();
         onClickSeeMore();
         onClickProduct();
+        onClickCategory();
+        onSearch();
+
         return view;
     }
 
@@ -114,6 +132,39 @@ public class HomeMenu extends Fragment {
         });
     }
 
+    private void onClickCategory(){
+        categoryAdapter.setOnCategoryClickListener(category -> {
+            Intent intent = new Intent(getContext(), SearchActivity.class);
+            intent.putExtra("CATEGORY_ID", (Serializable) category);
+            // Gửi các thông tin khác của sản phẩm nếu cần
+            startActivity(intent);
+        });
+    }
+
+    private void onSearch(){
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                    searchProduct(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                productsAdapter.setViewData(productsModelList);
+                productsAdapter.notifyDataSetChanged();
+                return false;
+            }
+        });
+    }
+
     private void onClickProduct(){
         productsAdapter.setOnProductClickListener(product -> {
             Intent intent = new Intent(getContext(), ProductDetailActivity.class);
@@ -124,9 +175,27 @@ public class HomeMenu extends Fragment {
     }
 
 
+    private void searchProduct(String name){
+        listTemp = new ArrayList<>();
+        for(ProductsModel productsModel: productsModelList){
+            if(productsModel.getName().contains(name)){
+                listTemp.add(productsModel);
+            }
+        }
 
+        if(listTemp.size() != 0){
+            productsAdapter.setViewData(listTemp);
+            productsAdapter.notifyDataSetChanged();
+            scrollView.post(new Runnable() {
+                @Override
+                public void run() {
+                    scrollView.fullScroll(View.FOCUS_DOWN);
+                }
+            });
+        }
+    }
 
-    private void loadTitleProductsFromFirebase() {
+    private void loadCategoryFromFirebase() {
         firestore.collection("category")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -146,7 +215,9 @@ public class HomeMenu extends Fragment {
                         Log.e("Firestore", "Error getting data", e);
                     }
                 });
+    }
 
+    private void loadDiscountFromFirebase(){
         firestore.collection("discount")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -166,13 +237,15 @@ public class HomeMenu extends Fragment {
                         Log.e("Firestore", "Error getting data", e);
                     }
                 });
+    }
 
+    private void loadProductFromFirebase(){
         firestore.collection("product")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
+                        productsModelList.clear();
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             ProductsModel item = documentSnapshot.toObject(ProductsModel.class);
                             List<HashMap<String, Object>> commentDataList = (List<HashMap<String, Object>>) documentSnapshot.get("comment");
