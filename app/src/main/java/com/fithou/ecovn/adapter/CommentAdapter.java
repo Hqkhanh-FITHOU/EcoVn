@@ -1,5 +1,6 @@
 package com.fithou.ecovn.adapter;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.model.authModels;
 import com.fithou.ecovn.model.product.Comment;
@@ -29,12 +31,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
     private List<Comment> comments;
     private authModels user;
-    private String avatarPath = "";
+    private Context context;
 
     FirebaseFirestore db;
 
+
     public CommentAdapter(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public CommentAdapter(List<Comment> comments, Context context) {
+        this.comments = comments;
+        this.context = context;
     }
 
     @NonNull
@@ -47,16 +55,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
         Comment comment = comments.get(position);
-        Uri uri = Uri.parse(getAvatarComment(comment.getUser_id()));
-        holder.img_user_comment.setImageURI(uri);
-        holder.user_name_comment.setText(user.getName());
+        loadAvatarAndImage(comment.getUser_id(),holder);
+
         holder.rating_comment.setRating(comment.getStar());
         holder.content_comment.setText(comment.getContent());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         holder.time_comment.setText(simpleDateFormat.format(comment.getDateTime()));
     }
 
-    private String getAvatarComment(String uid) {
+    private void loadAvatarAndImage(String uid, CommentViewHolder holder) {
         db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("users").document(uid);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -64,11 +71,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 user = documentSnapshot.toObject(authModels.class);
                 if(user != null){
-                    avatarPath = user.getImage();
+                    Glide.with(context).load(user.getImage()).into(holder.img_user_comment);
+                    holder.user_name_comment.setText(user.getName());
                 }
             }
         });
-        return avatarPath;
     }
 
     @Override
