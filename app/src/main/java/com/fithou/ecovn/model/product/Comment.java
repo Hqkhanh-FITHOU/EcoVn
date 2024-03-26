@@ -51,4 +51,14 @@ public class Comment {
     public void setDateTime(Date dateTime) {
         this.date_time = dateTime;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "user_id='" + user_id + '\'' +
+                ", content='" + content + '\'' +
+                ", star=" + star +
+                ", date_time=" + date_time +
+                '}';
+    }
 }

@@ -121,7 +121,7 @@ public class SearchActivity extends AppCompatActivity {
     private void searchProduct(String name) {
         listTemp = new ArrayList<>();
         for(ProductsModel productsModel: productsModelList){
-            if(productsModel.getName().contains(name)){
+            if(productsModel.getName().toLowerCase().contains(name.toLowerCase())){
                 listTemp.add(productsModel);
             }
         }
