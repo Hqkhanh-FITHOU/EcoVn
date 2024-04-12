@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -37,6 +38,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProductDetailActivity extends AppCompatActivity {
     ImageView img_product_detail;
 
@@ -46,8 +49,10 @@ public class ProductDetailActivity extends AppCompatActivity {
     RatingBar rating_product_detail;
 
     TextView btn_add_to_cart, btn_buy_now;
-    TextView none_comment;
+    TextView none_comment, name_shop_product_detail;
+    Button btn_see_shop;
     ImageView btn_back_product_detail, share_btn;
+    CircleImageView img_shop_product_detail;
 
     RecyclerView comment_recycleview;
     CommentAdapter commentAdapter;
@@ -78,13 +83,37 @@ public class ProductDetailActivity extends AppCompatActivity {
         container_type_product_detail.setText(" "+product.getContainer_type());
         description_product_detail.setText(product.getDes());
 
+        loadShopInfor(product.getFK_shop_id());
+        clickButtonSeeShop(product.getFK_shop_id());
         getComments(product.getProduct_id());
-        if(comments == null || comments.size() == 0){
 
-        }else {
-
-        }
     }
+
+    private void clickButtonSeeShop(String fk_shop_id) {
+        btn_see_shop.setOnClickListener(view -> {
+            Intent intent = new Intent(this,StoreActivity.class);
+            intent.putExtra("shop_id", fk_shop_id);
+            startActivity(intent);
+        });
+    }
+
+    private void loadShopInfor(String shopId) {
+        db = FirebaseFirestore.getInstance();
+        db.collection("shop").document(shopId)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot doc = task.getResult();
+                            Glide.with(ProductDetailActivity.this)
+                                    .load(doc.get("img_shop") == "" ? R.mipmap.ic_launcher : doc.get("img_shop"))
+                                    .into(img_shop_product_detail);
+                            name_shop_product_detail.setText((String) doc.get("name"));
+                        }
+                    }
+                });
+    }
+
 
     private void getComments(String pid){
         Log.d("ProductDetailActivity.pid", pid);
@@ -175,8 +204,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         btn_back_product_detail = findViewById(R.id.btn_back_product_detail);
         none_comment = findViewById(R.id.none_comment);
         comment_recycleview = findViewById(R.id.comment_recycleview);
+        btn_see_shop = findViewById(R.id.btn_see_shop);
+        name_shop_product_detail = findViewById(R.id.name_shop_product_detail);
+        img_shop_product_detail = findViewById(R.id.img_shop_product_detail);
     }
 
+    @NonNull
     private String formatCurrency(double c) {
         DecimalFormat decimalFormat = null;
         if(c >= 1000){

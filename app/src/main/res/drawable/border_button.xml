@@ -5,9 +5,6 @@
         android:radius="40dp"
         />
 
-    <solid
-        android:color="@color/white"
-        />
     <stroke
         android:color="@color/Free_Speech_Blue"
         android:width="1dp"/>

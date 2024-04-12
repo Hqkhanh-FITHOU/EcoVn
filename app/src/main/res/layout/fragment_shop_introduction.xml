@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none"
+    tools:context=".shop_tabfragment.ShopIntroductionFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+
+            <TableRow>
+                <TextView
+                    android:drawableStart="@drawable/phone"
+                    android:drawablePadding="14dp"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Điện thoại"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="20dp"/>
+
+                <TextView
+                    android:id="@+id/shop_phone"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:paddingStart="8dp"
+                    android:textColor="@color/Free_Speech_Blue"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+
+
+
+            <TableRow>
+                <TextView
+                    android:drawableStart="@drawable/calendar2_event"
+                    android:drawablePadding="13dp"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày tham gia"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="20dp"/>
+
+                <TextView
+                    android:id="@+id/shop_joining_date"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:paddingStart="8dp"
+                    android:textColor="@color/Free_Speech_Blue"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:drawableStart="@drawable/box_seam"
+                    android:drawablePadding="13dp"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sản phẩm"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="20dp"/>
+
+                <TextView
+                    android:id="@+id/shop_products_count"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text=""
+                    android:textColor="@color/Free_Speech_Blue"
+                    android:paddingStart="8dp"
+                    android:layout_marginBottom="10dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:drawableStart="@drawable/three_dots"
+                    android:drawablePadding="13dp"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mô tả"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="20dp"/>
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/shop_description"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:justificationMode="inter_word"
+            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="20dp"/>
+
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>
