@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".sub_activity.CreateShop">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/create_shop_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:layout_collapseMode="pin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_back_create_shop"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_arrow_back_24" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/create_shop_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:text="Hoàn tất thông tin \nbán hàng"
+        android:textColor="@color/Free_Speech_Blue"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/create_shop_toolbar"/>
+
+    <EditText
+        android:id="@+id/create_shop_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:drawableStart="@drawable/round_text_fields_24"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Tên shop"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@color/Free_Speech_Blue"
+        android:layout_below="@+id/create_shop_title"/>
+
+    <EditText
+        android:id="@+id/create_shop_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:drawableStart="@drawable/phone"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Điện thoại"
+        android:inputType="phone"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@color/Free_Speech_Blue"
+        android:layout_below="@+id/create_shop_name"/>
+
+    <EditText
+        android:id="@+id/create_shop_address"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:drawableStart="@drawable/location_geo"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Địa chỉ"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@color/Free_Speech_Blue"
+        android:layout_below="@+id/create_shop_phone"/>
+
+
+    <EditText
+        android:id="@+id/create_shop_description"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
+        android:drawableStart="@drawable/three_dots"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Lời giới thiệu"
+        android:inputType="textMultiLine"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@color/Free_Speech_Blue"
+        android:layout_below="@+id/create_shop_address"/>
+
+    <Button
+        android:id="@+id/btn_create_shop"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Hoàn tất"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/Free_Speech_Blue"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/border_button"
+        android:layout_below="@+id/create_shop_description"
+        />
+</RelativeLayout>
