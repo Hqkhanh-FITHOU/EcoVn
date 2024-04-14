@@ -36,7 +36,7 @@ public class AccountMenu extends Fragment {
 
         account_name.setText(MainActivity.CURRENT_USER.getName());
 
-        featureAdapter = new AccountFeatureAdapter();
+        featureAdapter = new AccountFeatureAdapter(MainActivity.CURRENT_USER);
         featureRecyclerView = view.findViewById(R.id.account_feature_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         featureRecyclerView.setLayoutManager(linearLayoutManager);
@@ -52,10 +52,10 @@ public class AccountMenu extends Fragment {
         List<AccountFeatureViewModel> list = new ArrayList<>();
         list.add(new AccountFeatureViewModel(1,R.drawable.round_event_note_24, "Đơn mua"));
         list.add(new AccountFeatureViewModel(2,R.drawable.wallet, "Tiện ích"));
-        list.add(new AccountFeatureViewModel(2,R.drawable.round_store_24, "Cửa hàng của tôi"));
-        list.add(new AccountFeatureViewModel(2,R.drawable.round_star_24, "Đánh giá của tôi"));
-        list.add(new AccountFeatureViewModel(2,R.drawable.round_settings_24, "Thiết lập tài khoản"));
-        list.add(new AccountFeatureViewModel(2,R.drawable.round_help_24, "Trung tâm trợ giúp"));
+        list.add(new AccountFeatureViewModel(3,R.drawable.round_store_24, "Cửa hàng của tôi"));
+        list.add(new AccountFeatureViewModel(4,R.drawable.round_star_24, "Đánh giá của tôi"));
+        list.add(new AccountFeatureViewModel(5,R.drawable.round_settings_24, "Thiết lập tài khoản"));
+        list.add(new AccountFeatureViewModel(6,R.drawable.round_help_24, "Trung tâm trợ giúp"));
         return list;
     }
 
