@@ -4,18 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".shop_tabfragment.ShopProductsFragment">
+    tools:context=".shop_tabfragment.ShopMyProductsFragment">
+
+    <TextView
+        android:id="@+id/no_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chưa có sản phẩm nào"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="180dp"
+        android:visibility="gone"
+        />
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/shop_products_list"
+        android:id="@+id/shop_myproducts_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:padding="8dp"
         android:scrollbars="none"
-        tools:itemCount="10"
-        app:spanCount="2"
+        tools:itemCount="9"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/products_list_item" />
+        app:spanCount="2"
+        tools:listitem="@layout/products_list_item_myshop" />
+
 </FrameLayout>

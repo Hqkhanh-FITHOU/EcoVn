@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-//                                progressDialog.dismiss();
+                                progressDialog.dismiss();
 //                                user.setId(auth.getCurrentUser().getUid());
 //                                user.setName(auth.getCurrentUser().getDisplayName());
 //                                user.setEmail(auth.getCurrentUser().getEmail());

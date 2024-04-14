@@ -80,7 +80,7 @@ public class ShopIntroductionFragment extends Fragment {
                     }
                 });
 
-        db.collection("product").whereEqualTo("FK_shop_id", s_id)
+        db.collection("product").whereEqualTo("fk_shop_id", s_id)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
