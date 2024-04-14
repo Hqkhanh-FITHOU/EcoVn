@@ -1,6 +1,7 @@
 package com.fithou.ecovn.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +11,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.model.AccountFeatureViewModel;
+import com.fithou.ecovn.model.authModels;
+import com.fithou.ecovn.sub_activity.AskCreateShop;
 
 import java.util.List;
 
 public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAdapter.AccountFeatureViewHolder> {
-    private Context context;
+
     private List<AccountFeatureViewModel> mfeatures;
+
+    private authModels user;
+
+    public AccountFeatureAdapter(authModels user) {
+        this.user = user;
+    }
 
     @NonNull
     @Override
@@ -42,11 +52,41 @@ public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAd
         holder.feature_name.setText(feature.getFeature_name());
 
 
-        holder.feature_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Xử lý sự kiện click item
-                Toast.makeText(view.getContext(), holder.feature_name.getText(), Toast.LENGTH_SHORT).show();
+        holder.feature_layout.setOnClickListener(view -> {
+            //Xử lý sự kiện click item
+            switch (feature.getFeature_id()){
+                case 1:
+
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3:
+                    if(user.isShop()){
+                        Toast.makeText(view.getContext(), feature.getFeature_name(), Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+//                        Toast.makeText(view.getContext(), feature.getFeature_name()+" is shop: " + user.isShop() + " user:" + user.getName(), Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(view.getContext(), AskCreateShop.class);
+                        view.getContext().startActivity(intent);
+                    }
+                    break;
+
+                case 4:
+
+                    break;
+
+                case 5:
+
+                    break;
+
+                case 6:
+
+                    break;
+
             }
         });
     }

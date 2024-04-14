@@ -113,4 +113,21 @@ public class authModels implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
+    @Override
+    public String toString() {
+        return "authModels{" +
+                "Id='" + Id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", gender=" + gender +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", date_of_birth='" + date_of_birth + '\'' +
+                ", image='" + image + '\'' +
+                ", isShop=" + isShop +
+                '}';
+    }
 }

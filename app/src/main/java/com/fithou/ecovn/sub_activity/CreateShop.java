@@ -8,12 +8,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.fithou.ecovn.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CreateShop extends AppCompatActivity {
     private EditText create_shop_name, create_shop_phone, create_shop_address, create_shop_description;
     private Button btn_create_shop;
 
     private ImageView btn_back_create_shop;
+
+    private FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,15 @@ public class CreateShop extends AppCompatActivity {
         btn_back_create_shop.setOnClickListener(view -> {
             finish();
         });
+
+        btn_create_shop.setOnClickListener(view -> {
+            clickFinish();
+        });
+    }
+
+    private void clickFinish() {
+        db = FirebaseFirestore.getInstance();
+        db.collection("").document("");
     }
 
     private void intitViewComponent() {
