@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddProduct extends AppCompatActivity {
-    private EditText productNameEditText, priceEditText, descriptionEditText;
+    private EditText productNameEditText, priceEditText, descriptionEditText, quantityEditText;
     private Spinner categorySpinner, unitSpinner, containerTypeSpinner;
     private Button btnAddProduct, btnCancel, btnAddImage;
 
@@ -71,6 +72,7 @@ public class AddProduct extends AppCompatActivity {
         btnAddProduct = findViewById(R.id.btn_add);
         btnCancel = findViewById(R.id.btn_cancel);
         btnAddImage = findViewById(R.id.btn_add_img);
+        quantityEditText = findViewById(R.id.quantity);
 
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -100,6 +102,10 @@ public class AddProduct extends AppCompatActivity {
                 String productName = productNameEditText.getText().toString().trim();
                 double price =Integer.parseInt(priceEditText.getText().toString().trim());
                 String description = descriptionEditText.getText().toString().trim();
+                int quantity = Integer.parseInt(quantityEditText.getText().toString().trim());
+                String unit = unitSpinner.getSelectedItem().toString();
+                String category = categorySpinner.getSelectedItem().toString();
+                String containertype = containerTypeSpinner.getSelectedItem().toString();
 
                 if (productName.isEmpty() || price < 0 || description.isEmpty() || selectedProductType.isEmpty() || selectedImageUri == null) {
                     Toast.makeText(AddProduct.this, "Please fill all fields and select an image", Toast.LENGTH_SHORT).show();
@@ -119,6 +125,11 @@ public class AddProduct extends AppCompatActivity {
                                         product.setImg(uri.toString());
                                         product.setDes(description);
                                         product.setFK_category_id(getIdFromTitle(categoryTemp));
+                                        product.setFK_shop_id(MyStoreActivity.SHOP_ID);
+                                        product.setQuantity(quantity);
+                                        product.setUnit(unit);
+                                        product.setContainer_type(containertype);
+
                                         db.collection("product")
                                                 .add(product)
                                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -130,6 +141,8 @@ public class AddProduct extends AppCompatActivity {
                                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void unused) {
+                                                                        Intent intent = new Intent(AddProduct.this, MyStoreActivity.class);
+                                                                        setResult(Activity.RESULT_OK, intent);
                                                                         finish();
                                                                     }
                                                                 }).addOnFailureListener(new OnFailureListener() {

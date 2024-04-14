@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/more"
+        android:title="Thay đổi thông tin shop"
+        android:icon="@drawable/baseline_more_vert_24"
+        app:showAsAction="always">
+
+        <menu>
+            <item
+                android:id="@+id/change_info_shop"
+                android:title="Thay đổi thông tin shop"
+                android:icon="@drawable/round_error_24"
+                app:showAsAction="ifRoom"
+                />
+
+            <item
+                android:id="@+id/add_product"
+                android:title="Thêm sản phẩm"
+                android:icon="@drawable/baseline_inventory_24"
+                app:showAsAction="ifRoom"
+                />
+        </menu>
+
+    </item>
+
+
+
+
+</menu>

@@ -14,10 +14,18 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fithou.ecovn.MainActivity;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.model.AccountFeatureViewModel;
 import com.fithou.ecovn.model.authModels;
 import com.fithou.ecovn.sub_activity.AskCreateShop;
+import com.fithou.ecovn.sub_activity.MyStoreActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
@@ -26,6 +34,8 @@ public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAd
     private List<AccountFeatureViewModel> mfeatures;
 
     private authModels user;
+
+    FirebaseFirestore db;
 
     public AccountFeatureAdapter(authModels user) {
         this.user = user;
@@ -65,7 +75,23 @@ public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAd
 
                 case 3:
                     if(user.isShop()){
-                        Toast.makeText(view.getContext(), feature.getFeature_name(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(view.getContext(), feature.getFeature_name(), Toast.LENGTH_SHORT).show();
+                        db = FirebaseFirestore.getInstance();
+                        db.collection("shop").whereEqualTo("user_id", MainActivity.CURRENT_USER.getId())
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            if(!task.getResult().isEmpty()){
+                                                DocumentSnapshot doc = task.getResult().getDocuments().get(0);
+                                                Intent intent = new Intent(view.getContext(), MyStoreActivity.class);
+                                                intent.putExtra("shop_id", doc.getId());
+                                                view.getContext().startActivity(intent);
+                                            }
+                                        }
+                                    }
+                                });
                     }
                     else{
 //                        Toast.makeText(view.getContext(), feature.getFeature_name()+" is shop: " + user.isShop() + " user:" + user.getName(), Toast.LENGTH_SHORT).show();

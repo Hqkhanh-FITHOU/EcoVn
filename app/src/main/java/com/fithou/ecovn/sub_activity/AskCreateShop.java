@@ -1,7 +1,11 @@
 package com.fithou.ecovn.sub_activity;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -13,6 +17,22 @@ public class AskCreateShop extends AppCompatActivity {
     private ImageView btn_back_active;
     private Button btn_active_shop;
 
+    private ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if(result.getResultCode() == Activity.RESULT_OK){
+                    Intent data = result.getData();
+                    if(data != null){
+                        String shopID = data.getStringExtra("shop_id");
+                        Intent intent = new Intent(AskCreateShop.this, MyStoreActivity.class);
+                        intent.putExtra("shop_id", shopID);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        finish();
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +48,7 @@ public class AskCreateShop extends AppCompatActivity {
 
         btn_active_shop.setOnClickListener(view -> {
             Intent intent = new Intent(AskCreateShop.this, CreateShop.class);
-            startActivity(intent);
+            activityLauncher.launch(intent);
         });
     }
 }
