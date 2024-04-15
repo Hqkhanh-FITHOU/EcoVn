@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fithou.ecovn.helper.UserSingleton;
 import com.fithou.ecovn.model.authModels;
 import com.fithou.ecovn.MainActivity;
 import com.fithou.ecovn.R;
@@ -22,7 +24,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
@@ -70,34 +71,15 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 progressDialog.dismiss();
-//                                user.setId(auth.getCurrentUser().getUid());
-//                                user.setName(auth.getCurrentUser().getDisplayName());
-//                                user.setEmail(auth.getCurrentUser().getEmail());
-//                                user.setPassword(password);
-                                firestore.collection("users")
-                                        .document(auth.getCurrentUser().getUid())
-                                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                if(task.isSuccessful()){
-                                                    DocumentSnapshot doc = task.getResult();
-                                                    user.setId((String) doc.get("id"));
-                                                    user.setName((String)doc.get("name"));
-                                                    user.setEmail((String)doc.get("email"));
-                                                    user.setPassword((String)doc.get("password"));
-                                                    user.setDate_of_birth((String) doc.get("date_of_birth"));
-                                                    user.setImage((String) doc.get("image"));
-                                                    user.setShop(doc.getBoolean("is_shop"));
-                                                    user.setPhone((String) doc.get("phone"));
-                                                    user.setGender(doc.getBoolean("gender"));
-                                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                    intent.putExtra("user", user);
-                                                    startActivity(intent);
-                                                    finish();
-                                                }
-                                            }
-                                        });
-
+                                user.setId(auth.getCurrentUser().getUid());
+                                user.setName(auth.getCurrentUser().getDisplayName());
+                                user.setEmail(auth.getCurrentUser().getEmail());
+                                user.setPassword(password);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("user", user);
+                                UserSingleton.getInstance().setUser(user);
+                                startActivity(intent);
+                                finish();
                             }else{
                                 progressDialog.dismiss();
                                 Toast.makeText(LoginActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -107,9 +89,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
 
         btn_create_new = findViewById(R.id.btn_new_register);
         tv_forget_pass = findViewById(R.id.tvForgetPass);
@@ -131,6 +110,4 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

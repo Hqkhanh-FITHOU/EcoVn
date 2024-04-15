@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fithou.ecovn.R;
+import com.fithou.ecovn.helper.CurrencyFormatter;
 import com.fithou.ecovn.model.product.ProductsModel;
 
 import java.text.DecimalFormat;
@@ -66,7 +67,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         }
 
         holder.name.setText(productsModel.getName());
-        holder.cost.setText(formatCurrency(productsModel.getCost()));
+        holder.cost.setText(CurrencyFormatter.formatCurrency(productsModel.getCost()));
 
         holder.product_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,37 +101,5 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             cost = itemView.findViewById(R.id.cost_products);
             product_layout = itemView.findViewById(R.id.product_layout);
         }
-    }
-
-
-    private String formatCurrency(double c) {
-        DecimalFormat decimalFormat = null;
-        if(c >= 1000){
-            decimalFormat = new DecimalFormat("#,###");
-        }
-        if(c >= 10000){
-            decimalFormat = new DecimalFormat("##,###");
-        }
-        if(c >= 100000){
-            decimalFormat = new DecimalFormat("###,###");
-        }
-        if(c >= 1000000){
-            decimalFormat = new DecimalFormat("#,###,###");
-        }
-        if(c >= 1000000){
-            decimalFormat = new DecimalFormat("#,###,###");
-        }
-        if(c >= 10000000){
-            decimalFormat = new DecimalFormat("##,###,###");
-        }
-        if(c >= 100000000){
-            decimalFormat = new DecimalFormat("###,###,###");
-        }
-
-        if(decimalFormat == null){
-            return c+"đ";
-        }
-
-        return decimalFormat.format(c) + "đ";
     }
 }

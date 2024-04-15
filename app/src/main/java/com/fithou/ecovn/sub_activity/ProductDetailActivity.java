@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,10 +19,15 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.adapter.CommentAdapter;
+import com.fithou.ecovn.helper.UserSingleton;
+import com.fithou.ecovn.model.authModels;
+import com.fithou.ecovn.model.cart.CartModel;
+import com.fithou.ecovn.model.cart.ProductCartModel;
 import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -37,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -60,6 +66,21 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     ProductsModel product;
+    private FirebaseFirestore firestore;
+
+    private authModels authModels;
+
+
+    ProgressDialog progressDialog;
+
+    private Boolean checkExistsCart;
+
+    private String cartIds = "";
+
+    private String currentUser = "";
+    public ProductDetailActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +96,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(product.getImg())
                 .into(img_product_detail);
-
+        authModels = UserSingleton.getInstance().getUser();
+        firestore = FirebaseFirestore.getInstance();
         name_product_detail.setText(product.getName());
         price_product_detail.setText(formatCurrency(product.getCost()));
         quantity_product_detail.setText(product.getQuantity()+"");
@@ -83,11 +105,26 @@ public class ProductDetailActivity extends AppCompatActivity {
         container_type_product_detail.setText(" "+product.getContainer_type());
         description_product_detail.setText(product.getDes());
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Thêm vào giỏ hàng");
+        progressDialog.setMessage("Đang thực hiện !");
+
+        checkExistsCart = false;
         loadShopInfor(product.getFK_shop_id());
         clickButtonSeeShop(product.getFK_shop_id());
         getComments(product.getProduct_id());
+        onAddToCart();
+        if(comments == null || comments.size() == 0){}
+        if(authModels != null){
+            currentUser = authModels.getId();
+        }else{
+            currentUser = "";
+        }
+        Log.d("Current user ", UserSingleton.getInstance().getUser().getId());
+        }
 
-    }
+
+
 
     private void clickButtonSeeShop(String fk_shop_id) {
         btn_see_shop.setOnClickListener(view -> {
@@ -180,6 +217,95 @@ public class ProductDetailActivity extends AppCompatActivity {
                         Log.d("Comments", "Null or empty");
                     }
                 });
+    }
+
+
+    private void onAddToCart(){
+        final String[] cartId = {""};
+        ArrayList<ProductCartModel> cartData = new ArrayList<>();
+        firestore.collection("cart")
+                .whereEqualTo("user_id",UserSingleton.getInstance().getUser().getId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            CartModel item = documentSnapshot.toObject(CartModel.class);
+
+                            cartId[0] = item.getCart_id();
+                            List<HashMap<String, Object>> productDataList = (List<HashMap<String, Object>>) documentSnapshot.get("product");
+                            if (productDataList != null) {
+                                List<ProductCartModel> productCartModels = new ArrayList<>();
+                                for (HashMap<String, Object> productData : productDataList) {
+                                    String product_id = (String) productData.get("product_id");
+                                    String quantity_order = (String) productData.get("quantity_order");
+                                    ProductCartModel productCartModel = new ProductCartModel(product_id, quantity_order);
+                                    productCartModels.add(productCartModel);
+                                    cartData.add(productCartModel);
+                                }
+                                item.setProductCartModel(productCartModels);
+                            }
+                        }
+
+                        cartIds = cartId[0];
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Firestore", "Error getting data", e);
+                    }
+                });
+        btn_add_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progressDialog.show();
+                ProductCartModel productCartModel = new ProductCartModel(product.getProduct_id(), "1");
+                for (ProductCartModel item: cartData){
+                    if(item.getProduct_id().equals(product.getProduct_id())){
+                        checkExistsCart = true;
+                    }
+                }
+                if(!checkExistsCart){
+                    cartData.add(productCartModel);
+                }else{
+                    Toast.makeText(ProductDetailActivity.this, "Sản phẩm đã có trong giỏ hàng", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Map<String, Object> updateData = new HashMap<>();
+                updateData.put("product", cartData);
+
+                DocumentReference documentReference = firestore.collection("cart").document(cartId[0]);
+                documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        documentReference.update(updateData)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(ProductDetailActivity.this, "Thêm vào giỏ hàng thành công", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(ProductDetailActivity.this, "Thêm vào giỏ hàng thất bại", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+                        Toast.makeText(ProductDetailActivity.this, "Thêm vào giỏ hàng thất bại ... ", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
     }
 
 
