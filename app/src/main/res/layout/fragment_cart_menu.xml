@@ -1,14 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".menu.CartMenu">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Cart" />
+        android:layout_height="wrap_content"
+        android:id="@+id/cart_toolbar"
+        android:layout_marginRight="16dp">
 
-</FrameLayout>
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="left"
+                android:scaleType="centerInside"
+                android:src="@drawable/baseline_arrow_back_24"/>
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giỏ hàng"
+                android:textSize="18dp"
+                android:layout_toEndOf="@id/backButton"
+                android:textStyle="bold"
+                android:textColor="@color/Free_Speech_Blue"
+                android:layout_gravity="center"
+                android:paddingBottom="5dp"/>
+
+            <ImageView
+                android:id="@+id/btn_delete"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:scaleType="centerInside"
+                android:src="@drawable/delete"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+        android:id="@+id/view_below"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#b0b0b0"
+        android:layout_gravity="bottom"
+        android:layout_below="@+id/cart_toolbar"/>
+    <CheckBox
+        android:id="@+id/checkbox_select_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="Chọn tất cả"
+        android:textSize="16sp"
+        android:layout_below="@+id/view_below"/>
+
+    <ScrollView
+        android:id="@+id/list_cart"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@+id/checkbox_select_all"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginTop="1dp"
+        android:scrollbars="none">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cart_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:padding="8dp"
+            android:scrollbars="none"
+            tools:itemCount="10"
+            tools:listitem="@layout/cart_list_item" />
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/frame_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_cart"
+        android:layout_marginHorizontal="32dp">
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng tiền:"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/Free_Speech_Blue"
+            android:layout_gravity="left"
+            android:paddingBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 d"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/Free_Speech_Blue"
+            android:layout_gravity="right"
+            android:paddingBottom="5dp"/>
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="60dp"
+        android:backgroundTint="@color/Free_Speech_Blue"
+        android:layout_below="@+id/frame_total"
+        android:text="Thanh toán"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>
