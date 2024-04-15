@@ -3,12 +3,14 @@ package com.fithou.ecovn.menu;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.fithou.ecovn.R;
+import com.fithou.ecovn.Sensor.ShakeDetector;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +21,7 @@ public class NotificationMenu extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private ShakeDetector shakeDetector;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -60,7 +63,33 @@ public class NotificationMenu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification_menu, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_notification_menu, container, false);
+
+        shakeDetector = new ShakeDetector(getContext());
+        shakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+            @Override
+            public void onShake(int count) {
+                // Xử lý khi xảy ra sự kiện lắc màn hình
+                // Chuyển về màn hình Home
+                // Ví dụ:
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            }
+        });
+
+        return rootView;
+
     }
+    //sensor--------------
+    @Override
+    public void onPause() {
+        super.onPause();
+        shakeDetector.stop();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        shakeDetector.start();
+    }
+   // ---------------------------------
 }
