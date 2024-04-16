@@ -22,6 +22,7 @@ import com.fithou.ecovn.adapter.CommentAdapter;
 import com.fithou.ecovn.helper.UserSingleton;
 import com.fithou.ecovn.model.authModels;
 import com.fithou.ecovn.model.cart.CartModel;
+import com.fithou.ecovn.model.cart.ExtendProductModel;
 import com.fithou.ecovn.model.cart.ProductCartModel;
 import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
@@ -114,6 +115,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         clickButtonSeeShop(product.getFK_shop_id());
         getComments(product.getProduct_id());
         onAddToCart();
+        onBuyNow();
         if(comments == null || comments.size() == 0){}
         if(authModels != null){
             currentUser = authModels.getId();
@@ -270,6 +272,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 if(!checkExistsCart){
                     cartData.add(productCartModel);
                 }else{
+                    progressDialog.dismiss();
                     Toast.makeText(ProductDetailActivity.this, "Sản phẩm đã có trong giỏ hàng", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -308,7 +311,34 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     }
 
+    private void onBuyNow(){
+        ExtendProductModel model = new ExtendProductModel();
+        model.setQuantity_order("1");
+        model.setQuantity(product.getQuantity());
+        model.setProduct_id(product.getProduct_id());
+        model.setCost(product.getCost());
+        model.setDes(product.getDes());
+        model.setComment(product.getComment());
+        model.setContainer_type(product.getContainer_type());
+        model.setFK_category_id(product.getFK_category_id());
+        model.setFK_shop_id(product.getFK_shop_id());
+        model.setImg(product.getImg());
+        model.setName(product.getName());
+        model.setUnit(product.getUnit());
 
+        ArrayList<ExtendProductModel> extendProductModels = new ArrayList<>();
+        extendProductModels.add(model);
+
+        btn_buy_now.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProductDetailActivity.this, PaymentActivity.class);
+                intent.putParcelableArrayListExtra("extendProductModels",  extendProductModels);
+                startActivity(intent);
+            }
+        });
+
+    }
     private void onClickBack() {
         btn_back_product_detail.setOnClickListener(view -> {
             finish();

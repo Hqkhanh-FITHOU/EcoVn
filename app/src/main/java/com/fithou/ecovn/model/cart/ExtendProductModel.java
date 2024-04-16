@@ -1,13 +1,15 @@
 package com.fithou.ecovn.model.cart;
 
 import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ExtendProductModel extends ProductsModel {
+public class ExtendProductModel extends ProductsModel implements Serializable, Parcelable {
     private String quantity_order;
 
     private boolean isChecked;
@@ -26,12 +28,36 @@ public class ExtendProductModel extends ProductsModel {
         this.isChecked = isChecked;
     }
 
-    public ExtendProductModel(Parcel in, String quantity, boolean isChecked) {
+    public ExtendProductModel(Parcel in) {
         super(in);
-        this.quantity_order = quantity;
-        this.isChecked = isChecked;
+        quantity_order = in.readString();
+        isChecked = in.readBoolean();
     }
 
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(quantity_order);
+        dest.writeByte((byte) (isChecked ? 1 : 0));
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<ExtendProductModel> CREATOR = new Creator<ExtendProductModel>() {
+        @Override
+        public ExtendProductModel createFromParcel(Parcel in) {
+            return new ExtendProductModel(in);
+        }
+
+        @Override
+        public ExtendProductModel[] newArray(int size) {
+            return new ExtendProductModel[size];
+        }
+    };
 
     public String getQuantity_order() {
         return quantity_order;

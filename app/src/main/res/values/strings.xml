@@ -3,6 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">LoginActivity</string>
-
+    <string-array name="payment_options">
+        <item>COD</item>
+        <item>Thanh toán qua ngân hàng</item>
+    </string-array>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis justo ac lectus sodales placerat. In hac habitasse platea dictumst. Sed fermentum, velit sit amet vestibulum fringilla, ipsum nisi tristique urna, id pharetra justo magna vel libero. Sed fermentum, velit sit amet vestibulum fringilla, ipsum nisi tristique urna, id pharetra justo magna vel libero.</string>
 </resources>

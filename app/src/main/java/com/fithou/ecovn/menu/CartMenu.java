@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,26 +19,23 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.adapter.CartAdapter;
 import com.fithou.ecovn.helper.CartSingleton;
-import com.fithou.ecovn.helper.CurrencyFormatter;
 import com.fithou.ecovn.helper.UserSingleton;
+import com.fithou.ecovn.model.payment.PaymentModel;
 import com.fithou.ecovn.model.authModels;
 import com.fithou.ecovn.model.cart.CartModel;
 import com.fithou.ecovn.model.cart.ExtendProductModel;
 import com.fithou.ecovn.model.cart.ProductCartModel;
 import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
-import com.fithou.ecovn.sub_activity.ProductDetailActivity;
+import com.fithou.ecovn.sub_activity.PaymentActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -69,7 +65,11 @@ public class CartMenu extends Fragment {
     private ArrayList<CartModel> cartModels;
     private ArrayList<ExtendProductModel> extendProductModels;
 
+    private PaymentModel paymentModels;
+
     private authModels authModels;
+
+    private String userId;
 
 
     private ArrayList<String> productIdsList = new ArrayList<>();
@@ -97,12 +97,13 @@ public class CartMenu extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_cart_menu, container, false);
-
+        userId = UserSingleton.getInstance().getUser().getId();
         firestore = FirebaseFirestore.getInstance();
         authModels = UserSingleton.getInstance().getUser();
         cartModels = new ArrayList<>();
         extendProductModels = new ArrayList<>();
         productsModelList = new ArrayList<>();
+        paymentModels = new PaymentModel();
         checkAllSelect = view.findViewById(R.id.checkbox_select_all);
         total = view.findViewById(R.id.tv_total_price);
         img_delete = view.findViewById(R.id.btn_delete);
@@ -140,10 +141,24 @@ public class CartMenu extends Fragment {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                onGetCartChecked();
+                Intent intent = new Intent(getContext(), PaymentActivity.class);
+                ArrayList<ExtendProductModel> model = new ArrayList<>();
+                paymentModels.setProductCartModel(onGetCartChecked("payment"));
+
+                for (ExtendProductModel ex : extendProductModels){
+                    for (ProductCartModel paymentModel : paymentModels.getProductCartModel()){
+                       if(ex.getProduct_id().equals(paymentModel.getProduct_id())){
+                           model.add(ex);
+                       }
+                    }
+                }
+
+                intent.putParcelableArrayListExtra("extendProductModels",  model);
+                startActivity(intent);
             }
         });
     }
+
 
     private List<ProductCartModel> onGetCartChecked(String type){
         String typeForPayment = "payment"; // Get list product to payment
@@ -180,7 +195,7 @@ public class CartMenu extends Fragment {
 
     private void loadCartFromFirebase() {
         firestore.collection("cart")
-                .whereEqualTo("user_id",UserSingleton.getInstance().getUser().getId())
+                .whereEqualTo("user_id",userId)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
