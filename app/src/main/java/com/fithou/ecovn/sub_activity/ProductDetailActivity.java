@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.fithou.ecovn.MainActivity;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.adapter.CommentAdapter;
 import com.fithou.ecovn.helper.UserSingleton;
@@ -122,7 +123,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         }else{
             currentUser = "";
         }
-        Log.d("Current user ", UserSingleton.getInstance().getUser().getId());
+        Log.d("Current user ", MainActivity.CURRENT_USER.getId());
         }
 
 
@@ -226,7 +227,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         final String[] cartId = {""};
         ArrayList<ProductCartModel> cartData = new ArrayList<>();
         firestore.collection("cart")
-                .whereEqualTo("user_id",UserSingleton.getInstance().getUser().getId())
+                .whereEqualTo("user_id", MainActivity.CURRENT_USER.getId())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -262,6 +263,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         btn_add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("TEST", cartId[0]);
+                Log.d("TEST", MainActivity.CURRENT_USER.getId());
                 progressDialog.show();
                 ProductCartModel productCartModel = new ProductCartModel(product.getProduct_id(), "1");
                 for (ProductCartModel item: cartData){

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -14,17 +15,22 @@ import com.fithou.ecovn.menu.AccountMenu;
 import com.fithou.ecovn.menu.CartMenu;
 import com.fithou.ecovn.menu.HomeMenu;
 import com.fithou.ecovn.menu.NotificationMenu;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.tabs.TabLayout;
 import com.fithou.ecovn.R.id;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class MainActivity extends AppCompatActivity {
 //    TabLayout tabLayout;
     ViewPager2 viewPager2;
     ViewPagerAdapter viewPagerAdapter;
     BottomNavigationView bottomNavigationView;
     FrameLayout frameLayout;
-
+    FirebaseFirestore db;
     public static authModels CURRENT_USER;
 
     @Override
@@ -39,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNav);
         frameLayout = findViewById(R.id.frameLayout);
         CURRENT_USER = (authModels) getIntent().getSerializableExtra("user");
+        checkShop(CURRENT_USER);
 //        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 //            @Override
 //            public void onTabSelected(TabLayout.Tab tab) {
@@ -96,5 +103,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void checkShop(authModels user){
+        db = FirebaseFirestore.getInstance();
+        db.collection("users").document(user.getId())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            DocumentSnapshot doc = task.getResult();
+                            user.setShop(doc.getBoolean("shop"));
+                        }
+                    }
+                });
+    }
 
+    public void setBottomNavigationSelectedItem(int menuItemID){
+        bottomNavigationView.setSelectedItemId(menuItemID);
+        Log.w("Selected", "HOME");
+    }
 }

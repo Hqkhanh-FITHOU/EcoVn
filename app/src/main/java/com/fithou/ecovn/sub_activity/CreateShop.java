@@ -105,7 +105,7 @@ public class CreateShop extends AppCompatActivity {
     private void updateIsShopUserProfile(){
         db = FirebaseFirestore.getInstance();
         db.collection("users").document(MainActivity.CURRENT_USER.getId())
-                .update("is_shop",true)
+                .update("shop",true)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

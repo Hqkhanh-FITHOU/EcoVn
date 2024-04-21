@@ -15,7 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fithou.ecovn.R;
+import com.fithou.ecovn.custom_view.MyProgressDialog;
 import com.fithou.ecovn.model.product.ProductsModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -23,6 +27,8 @@ import java.util.List;
 public class MyProductsAdapter extends RecyclerView.Adapter<MyProductsAdapter.ViewHolder>{
     private Context context;
     private List<ProductsModel> productsModels;
+
+    private FirebaseFirestore db;
 
     private ProductsModel.OnProductClickListener onProductClickListener;
 
@@ -69,20 +75,16 @@ public class MyProductsAdapter extends RecyclerView.Adapter<MyProductsAdapter.Vi
         holder.name.setText(productsModel.getName());
         holder.cost.setText(formatCurrency(productsModel.getCost()));
 
-        holder.product_layout.setOnClickListener(view -> {
-            if (onProductClickListener != null) {
-                onProductClickListener.onProductClick(productsModel);
-            }
-        });
+
 
 
         holder.btn_edit_product.setOnClickListener(view -> {
-
+            onProductClickListener.onProductClick(productsModel);
         });
 
 
         holder.btn_delete_product.setOnClickListener(view -> {
-
+            deleteMyProduct(productsModel.getProduct_id(), position, view.getContext());
         });
     }
 
@@ -143,5 +145,27 @@ public class MyProductsAdapter extends RecyclerView.Adapter<MyProductsAdapter.Vi
         }
 
         return decimalFormat.format(c) + "đ";
+    }
+
+    private void deleteMyProduct(String productID, int position, Context context){
+        MyProgressDialog progressDialog = new MyProgressDialog(context);
+        progressDialog.setTitle("");
+        progressDialog.show();
+        db = FirebaseFirestore.getInstance();
+        db.collection("product").document(productID)
+                .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        notifyItemRemoved(position);
+                        productsModels.remove(position);
+                        progressDialog.dismiss();
+                        Log.d("Delete Product", "DocumentSnapshot successfully deleted!");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Delete Product","Error deleting document", e);
+                    }
+                });
     }
 }

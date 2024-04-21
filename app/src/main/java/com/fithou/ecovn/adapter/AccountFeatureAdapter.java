@@ -2,6 +2,7 @@ package com.fithou.ecovn.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fithou.ecovn.MainActivity;
 import com.fithou.ecovn.R;
+import com.fithou.ecovn.custom_view.MyProgressDialog;
 import com.fithou.ecovn.model.AccountFeatureViewModel;
 import com.fithou.ecovn.model.authModels;
 import com.fithou.ecovn.sub_activity.AskCreateShop;
@@ -75,6 +77,9 @@ public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAd
 
                 case 3:
                     if(user.isShop()){
+                        MyProgressDialog dialog = new MyProgressDialog(view.getContext());
+                        dialog.setTitle("");
+                        dialog.show();
 //                        Toast.makeText(view.getContext(), feature.getFeature_name(), Toast.LENGTH_SHORT).show();
                         db = FirebaseFirestore.getInstance();
                         db.collection("shop").whereEqualTo("user_id", MainActivity.CURRENT_USER.getId())
@@ -87,7 +92,9 @@ public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAd
                                                 DocumentSnapshot doc = task.getResult().getDocuments().get(0);
                                                 Intent intent = new Intent(view.getContext(), MyStoreActivity.class);
                                                 intent.putExtra("shop_id", doc.getId());
+
                                                 view.getContext().startActivity(intent);
+                                                dialog.dismiss();
                                             }
                                         }
                                     }

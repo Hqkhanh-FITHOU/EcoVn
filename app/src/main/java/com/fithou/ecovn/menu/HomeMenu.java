@@ -3,6 +3,7 @@ package com.fithou.ecovn.menu;
 import com.fithou.ecovn.adapter.CategoryAdapter;
 import com.fithou.ecovn.adapter.DiscountAdapter;
 import com.fithou.ecovn.adapter.ProductsAdapter;
+import com.fithou.ecovn.custom_view.MyProgressDialog;
 import com.fithou.ecovn.model.CategoryModel;
 import com.fithou.ecovn.model.DiscountModel;
 import com.fithou.ecovn.model.product.Comment;
@@ -208,6 +209,7 @@ public class HomeMenu extends Fragment {
                         }
                         categoryAdapter.setViewData(categoryModelList);
                         categoryAdapter.notifyDataSetChanged();
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -218,6 +220,7 @@ public class HomeMenu extends Fragment {
     }
 
     private void loadDiscountFromFirebase(){
+
         firestore.collection("discount")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -230,6 +233,7 @@ public class HomeMenu extends Fragment {
                         }
                         discountAdapter.setViewData(discountModelList);
                         discountAdapter.notifyDataSetChanged();
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -240,12 +244,16 @@ public class HomeMenu extends Fragment {
     }
 
     private void loadProductFromFirebase(){
+        MyProgressDialog progressDialog = new MyProgressDialog(this.getActivity());
+        progressDialog.setTitle("");
+        progressDialog.show();
         firestore.collection("product")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         productsModelList.clear();
+                        progressDialog.setTitle("");
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             ProductsModel item = documentSnapshot.toObject(ProductsModel.class);
                             List<HashMap<String, Object>> commentDataList = (List<HashMap<String, Object>>) documentSnapshot.get("comment");
@@ -277,6 +285,7 @@ public class HomeMenu extends Fragment {
                         }
                         productsAdapter.setViewData(productsModelList);
                         productsAdapter.notifyDataSetChanged();
+                        progressDialog.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

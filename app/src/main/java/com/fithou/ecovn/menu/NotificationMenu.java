@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fithou.ecovn.MainActivity;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.Sensor.ShakeDetector;
 
@@ -72,8 +73,10 @@ public class NotificationMenu extends Fragment {
                 // Xử lý khi xảy ra sự kiện lắc màn hình
                 // Chuyển về màn hình Home
                 // Ví dụ:
+
                 FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                 fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
             }
         });
 

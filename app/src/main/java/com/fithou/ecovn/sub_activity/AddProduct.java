@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.fithou.ecovn.R;
+import com.fithou.ecovn.custom_view.MyProgressDialog;
 import com.fithou.ecovn.model.CategoryModel;
 import com.fithou.ecovn.model.product.ProductsModel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -98,17 +99,21 @@ public class AddProduct extends AppCompatActivity {
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MyProgressDialog progressDialog = new MyProgressDialog(AddProduct.this);
+                progressDialog.setTitle("");
+                progressDialog.show();
                 String selectedProductType = categorySpinner.getSelectedItem().toString();
                 String productName = productNameEditText.getText().toString().trim();
                 double price =Integer.parseInt(priceEditText.getText().toString().trim());
                 String description = descriptionEditText.getText().toString().trim();
                 int quantity = Integer.parseInt(quantityEditText.getText().toString().trim());
                 String unit = unitSpinner.getSelectedItem().toString();
-                String category = categorySpinner.getSelectedItem().toString();
+                //String category = categorySpinner.getSelectedItem().toString();
                 String containertype = containerTypeSpinner.getSelectedItem().toString();
 
                 if (productName.isEmpty() || price < 0 || description.isEmpty() || selectedProductType.isEmpty() || selectedImageUri == null) {
                     Toast.makeText(AddProduct.this, "Please fill all fields and select an image", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                     return;
                 }
 
@@ -143,6 +148,7 @@ public class AddProduct extends AppCompatActivity {
                                                                     public void onSuccess(Void unused) {
                                                                         Intent intent = new Intent(AddProduct.this, MyStoreActivity.class);
                                                                         setResult(Activity.RESULT_OK, intent);
+                                                                        progressDialog.dismiss();
                                                                         finish();
                                                                     }
                                                                 }).addOnFailureListener(new OnFailureListener() {

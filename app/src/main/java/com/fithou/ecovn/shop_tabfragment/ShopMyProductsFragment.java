@@ -1,8 +1,11 @@
 package com.fithou.ecovn.shop_tabfragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,8 +20,11 @@ import android.widget.TextView;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.adapter.MyProductsAdapter;
 import com.fithou.ecovn.adapter.ProductsAdapter;
+import com.fithou.ecovn.custom_view.MyProgressDialog;
 import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
+import com.fithou.ecovn.sub_activity.EditProduct;
+import com.fithou.ecovn.sub_activity.MyStoreActivity;
 import com.fithou.ecovn.sub_activity.ProductDetailActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,6 +50,14 @@ public class ShopMyProductsFragment extends Fragment {
     FirebaseFirestore db;
     String shopID;
 
+    private ActivityResultLauncher<Intent> launcher  = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if(result.getResultCode() == Activity.RESULT_OK){
+                    ReloadData(MyStoreActivity.SHOP_ID);
+                }
+            });
+
     public ShopMyProductsFragment(String shopID) {
         this.shopID = shopID;
     }
@@ -67,15 +81,22 @@ public class ShopMyProductsFragment extends Fragment {
         shop_myproducts_list.setLayoutManager(gridLayoutProductManager);
         shop_myproducts_list.setAdapter(productsAdapter);
         loadProductFromFirebase(shopID);
-        onClickProduct();
+        onClickEditProduct();
         return view;
     }
 
-    private void onClickProduct(){
-
+    private void onClickEditProduct(){
+        productsAdapter.setOnProductClickListener(product -> {
+            Intent intent = new Intent(getContext(), EditProduct.class);
+            intent.putExtra("productID", product.getProduct_id());
+            launcher.launch(intent);
+        });
     }
 
     private void loadProductFromFirebase(String shopID){
+        MyProgressDialog dialog = new MyProgressDialog(this.getContext());
+        dialog.setTitle("");
+        dialog.show();
         db = FirebaseFirestore.getInstance();
         db.collection("product")
                 .whereEqualTo("fk_shop_id", shopID)
@@ -91,6 +112,8 @@ public class ShopMyProductsFragment extends Fragment {
                             }
                             productsAdapter.setViewData(productsModelListData);
                             productsAdapter.notifyDataSetChanged();
+                            no_product.setVisibility(View.INVISIBLE);
+                            dialog.dismiss();
                         }else {
                             no_product.setVisibility(View.VISIBLE);
                         }
