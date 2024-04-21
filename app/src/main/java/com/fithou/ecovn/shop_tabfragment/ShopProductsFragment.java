@@ -82,7 +82,7 @@ public class ShopProductsFragment extends Fragment {
     private void loadProductFromFirebase(String shopID){
         db = FirebaseFirestore.getInstance();
         db.collection("product")
-                .whereEqualTo("FK_shop_id", shopID)
+                .whereEqualTo("fk_shop_id", shopID)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

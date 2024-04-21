@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_gravity="center">
+            <ImageView
+                android:id="@+id/img_edit_product"
+                android:layout_width="230dp"
+                android:layout_height="240dp"
+                android:src="@drawable/logo"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"/>
+            <Button
+                android:id="@+id/btn_choose_img"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Chọn ảnh"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/Free_Speech_Blue"
+                android:background="@drawable/border_button"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edit_productId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mã sản phẩm"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:enabled="false"
+            android:drawableStart="@drawable/round_key_24"
+            android:drawablePadding="8dp"/>
+
+        <EditText
+            android:id="@+id/edit_productName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên sản phẩm"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:drawableStart="@drawable/round_text_fields_24"
+            android:drawablePadding="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loại"
+                android:textSize="17sp"
+                android:layout_gravity="center_vertical"
+                android:drawableStart="@drawable/round_category_24"
+                android:drawablePadding="10dp"
+                android:layout_marginLeft="4dp"
+                />
+            <Spinner
+                android:id="@+id/spin_edit_category"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:paddingLeft="10dp"
+                android:layout_marginStart="14dp"
+                />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edit_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Định lượng"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:drawableStart="@drawable/round_numbers_24"
+            android:drawablePadding="8dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đơn vị"
+                android:textSize="17sp"
+                android:layout_gravity="center_vertical"
+                android:drawableStart="@drawable/round_text_fields_24"
+                android:drawablePadding="10dp"
+                android:layout_marginLeft="4dp"
+                />
+            <Spinner
+                android:id="@+id/spin_edit_unit"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:paddingLeft="10dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dạng"
+                android:textSize="17sp"
+                android:layout_gravity="center_vertical"
+                android:drawableStart="@drawable/baseline_inventory_24"
+                android:drawablePadding="10dp"
+                android:layout_marginLeft="4dp"
+                />
+            <Spinner
+                android:id="@+id/spin_edit_container_type"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:paddingLeft="10dp"
+                android:layout_marginStart="8dp"
+                />
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/edit_cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Đơn giá"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:drawableStart="@drawable/round_attach_money_24"
+            android:drawablePadding="8dp"/>
+
+        <EditText
+            android:id="@+id/edit_des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mô tả"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:drawableStart="@drawable/round_description_24"
+            android:drawablePadding="8dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="32dp">
+
+            <Button
+                android:id="@+id/btn_edit_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="Cập nhật"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/Free_Speech_Blue"
+                android:background="@drawable/border_button"
+                android:layout_gravity="center"
+                />
+            <Button
+                android:id="@+id/btn_edit_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="Hủy"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="false"
+                android:textColor="@color/Free_Speech_Blue"
+                android:background="@drawable/border_button"
+                android:layout_gravity="center"
+                android:layout_marginBottom="40dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

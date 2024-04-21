@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fithou.ecovn.MainActivity;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.adapter.CartAdapter;
 import com.fithou.ecovn.helper.CartSingleton;
@@ -97,7 +98,7 @@ public class CartMenu extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_cart_menu, container, false);
-        userId = UserSingleton.getInstance().getUser().getId();
+        userId = MainActivity.CURRENT_USER.getId();
         firestore = FirebaseFirestore.getInstance();
         authModels = UserSingleton.getInstance().getUser();
         cartModels = new ArrayList<>();
@@ -107,7 +108,7 @@ public class CartMenu extends Fragment {
         checkAllSelect = view.findViewById(R.id.checkbox_select_all);
         total = view.findViewById(R.id.tv_total_price);
         img_delete = view.findViewById(R.id.btn_delete);
-        btn_back = view.findViewById(R.id.btn_back);
+        //btn_back = view.findViewById(R.id.btn_back);
         btn_save = view.findViewById(R.id.btn_save);
 
         progressDialog = new ProgressDialog(getContext());
@@ -241,9 +242,9 @@ public class CartMenu extends Fragment {
 
                             for (CartModel cartModel: cartModels){
                                 for (ProductCartModel productCartModel : cartModel.getProductCartModel())
-                                if(productCartModel.getProduct_id().equals(item.getProduct_id())){
-                                    item.setQuantity_order(productCartModel.getQuantity_order());
-                                }
+                                    if(productCartModel.getProduct_id().equals(item.getProduct_id())){
+                                        item.setQuantity_order(productCartModel.getQuantity_order());
+                                    }
                             }
                             List<HashMap<String, Object>> commentDataList = (List<HashMap<String, Object>>) documentSnapshot.get("comment");
                             if (commentDataList != null) {
