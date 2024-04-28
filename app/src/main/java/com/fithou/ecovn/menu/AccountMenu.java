@@ -56,6 +56,7 @@ public class AccountMenu extends Fragment {
         list.add(new AccountFeatureViewModel(4,R.drawable.round_star_24, "Đánh giá của tôi"));
         list.add(new AccountFeatureViewModel(5,R.drawable.round_settings_24, "Thiết lập tài khoản"));
         list.add(new AccountFeatureViewModel(6,R.drawable.round_help_24, "Trung tâm trợ giúp"));
+        list.add(new AccountFeatureViewModel(7, R.drawable.baseline_logout_24, "Đăng xuất"));
         return list;
     }
 

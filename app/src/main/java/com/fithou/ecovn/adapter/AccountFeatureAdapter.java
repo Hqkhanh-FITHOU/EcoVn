@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fithou.ecovn.MainActivity;
 import com.fithou.ecovn.R;
+import com.fithou.ecovn.auth.LoginActivity;
 import com.fithou.ecovn.custom_view.MyProgressDialog;
 import com.fithou.ecovn.model.AccountFeatureViewModel;
 import com.fithou.ecovn.model.authModels;
@@ -120,6 +121,12 @@ public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAd
 
                     break;
 
+                case 7:
+                    Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                    view.getContext().startActivity(intent);
+                    MainActivity context = (MainActivity) view.getContext();
+                    context.finish();
+                    break;
             }
         });
     }
