@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.fithou.ecovn.shop_tabfragment.ShopIntroductionFragment;
-import com.fithou.ecovn.shop_tabfragment.ShopProductsFragment;
+import com.fithou.ecovn.view.shop.ShopIntroductionFragment;
+import com.fithou.ecovn.view.shop.ShopProductsFragment;
 
 public class ShopTabAdapter extends FragmentStateAdapter {
 

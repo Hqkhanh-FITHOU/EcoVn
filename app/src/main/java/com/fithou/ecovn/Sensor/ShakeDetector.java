@@ -5,27 +5,20 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.widget.Toast;
 
 public class ShakeDetector implements SensorEventListener {
-        //ngưỡng lắc
-        private static final float SHAKE_THRESHOLD =500f;
-        //tg min giữa các lần lắc
-        private static final int SHAKE_TIMEOUT = 500;
-        // tg min của một lần lắc
-        private static final int SHAKE_DURATION = 1000;
-        // Số lần lắc cần
-        public static final int SHAKE_COUNT = 2;
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private Sensor v;
+    private OnShakeListener listener;
 
-        private SensorManager sensorManager;
-        private Sensor accelerometer;
-        private OnShakeListener listener;
-        private long lastShakeTime;
-        private long lastUpdateTime;
-        private int shakeCount;
+    //private Context context;
 
     public ShakeDetector(Context context) {
-            sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-            accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        //this.context = context;
+        //accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
     public void setOnShakeListener(OnShakeListener listener) {
@@ -33,11 +26,23 @@ public class ShakeDetector implements SensorEventListener {
     }
 
     public interface OnShakeListener {
-        void onShake(int count);
+        void onShake(float x,float y, float z);
     }
 
     public void start() {
-        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if (accelerometer != null) {
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+
+    }
+
+    public SensorManager getSensorManager() {
+        return sensorManager;
+    }
+
+    public void setSensorManager(SensorManager sensorManager) {
+        this.sensorManager = sensorManager;
     }
 
     public void stop() {
@@ -46,27 +51,13 @@ public class ShakeDetector implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            float x = event.values[0];
-            float y = event.values[1];
-            float z = event.values[2];
+        if(event != null){
+            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+                float x_accl = event.values[0];
+                float y_accl = event.values[1];
+                float z_accl = event.values[2];
+                listener.onShake(x_accl, y_accl, z_accl);
 
-            long currentTime = System.currentTimeMillis();
-            long deltaTime = currentTime - lastUpdateTime;
-
-            if (deltaTime > SHAKE_TIMEOUT) {
-                shakeCount = 0;
-            }
-            if (deltaTime > 0) {
-                float speed = Math.abs(x + y + z - lastShakeTime) / deltaTime * 10000;
-                if (speed > SHAKE_THRESHOLD) {
-                    if (++shakeCount >= SHAKE_COUNT) {
-                        listener.onShake(shakeCount);
-                        shakeCount = 0;
-                    }
-                    lastShakeTime = currentTime;
-                }
-                lastUpdateTime = currentTime;
             }
         }
     }

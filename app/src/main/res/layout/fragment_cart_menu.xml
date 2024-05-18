@@ -1,114 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menu.CartMenu">
+    android:background="#00E3E3E3"
+    tools:context=".view.dashboard.CartMenuFagment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/cart_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cart_toolbar"
-        android:layout_marginRight="16dp">
-            <TextView
-                android:id="@+id/titleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Giỏ hàng"
-                android:textSize="18dp"
-                android:layout_toEndOf="@id/backButton"
-                android:textStyle="bold"
-                android:textColor="@color/Free_Speech_Blue"
-                android:layout_gravity="center"
-                android:paddingBottom="5dp"/>
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:translationZ="1dp">
 
-            <ImageView
-                android:id="@+id/btn_delete"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="right"
-                android:scaleType="centerInside"
-                android:src="@drawable/delete"/>
+        <ImageView
+            android:id="@+id/btn_delete"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/delete" />
     </androidx.appcompat.widget.Toolbar>
 
-    <View
-        android:id="@+id/view_below"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#b0b0b0"
-        android:layout_gravity="bottom"
-        android:layout_below="@+id/cart_toolbar"/>
-    <CheckBox
-        android:id="@+id/checkbox_select_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:text="Chọn tất cả"
-        android:textSize="16sp"
-        android:layout_below="@+id/view_below"/>
-
     <ScrollView
-        android:id="@+id/list_cart"
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_below="@+id/checkbox_select_all"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginVertical="8dp"
-        android:layout_marginTop="1dp"
-        android:scrollbars="none">
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/frame_total"
+        app:layout_constraintTop_toBottomOf="@+id/cart_toolbar">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cart_list"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:padding="8dp"
-            android:scrollbars="none"
-            tools:itemCount="10"
-            tools:listitem="@layout/cart_list_item" />
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cart_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="8dp"
+                android:scrollbars="none"
+                tools:itemCount="10"
+                tools:listitem="@layout/cart_list_item" />
+
+        </LinearLayout>
+
     </ScrollView>
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/frame_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/list_cart"
-        android:layout_marginHorizontal="32dp">
+        android:background="@drawable/border_button"
+        android:translationZ="1dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="8dp"
+        android:backgroundTint="@color/Free_Speech_Blue"
+        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="8dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <CheckBox
+            android:id="@+id/checkbox_select_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/white"
+            android:text="Chọn tất cả"
+            android:textSize="14sp"
+            android:buttonTint="@color/white"/>
+
         <TextView
+            android:layout_below="@+id/checkbox_select_all"
             android:id="@+id/tv_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tổng tiền:"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="@color/Free_Speech_Blue"
             android:layout_gravity="left"
-            android:paddingBottom="5dp"/>
+            android:paddingBottom="5dp"
+            android:text="Tổng tiền"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+ />
 
         <TextView
+            android:layout_below="@+id/checkbox_select_all"
             android:id="@+id/tv_total_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 d"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="@color/Free_Speech_Blue"
+            android:layout_alignParentEnd="true"
             android:layout_gravity="right"
-            android:paddingBottom="5dp"/>
-    </FrameLayout>
+            android:paddingBottom="5dp"
+            android:text="0 đ"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_total"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="0dp"
+            android:background="@drawable/border_button"
+            android:backgroundTint="@color/white"
+            android:text="Mua hàng"
+            android:textColor="@color/Free_Speech_Blue" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_no_product"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Chưa có sản phẩm trong giỏ"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_login_to_user_cart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="60dp"
+        android:id="@+id/btn_login_to_user_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Đăng nhập"
+        android:paddingHorizontal="20dp"
+        android:textAllCaps="false"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:background="@drawable/border_button"
         android:backgroundTint="@color/Free_Speech_Blue"
-        android:layout_below="@+id/frame_total"
-        android:text="Thanh toán"
-        android:textColor="@color/white"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cart_toolbar"
+        app:layout_constraintVertical_bias="0.38" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

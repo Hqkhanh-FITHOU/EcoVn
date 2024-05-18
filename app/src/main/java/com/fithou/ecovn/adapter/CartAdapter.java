@@ -18,10 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.helper.CurrencyFormatter;
-import com.fithou.ecovn.menu.CartMenu;
 import com.fithou.ecovn.model.cart.CartModel;
 import com.fithou.ecovn.model.cart.ExtendProductModel;
-import com.fithou.ecovn.model.cart.ProductCartModel;
 import com.fithou.ecovn.model.product.ProductsModel;
 
 import java.util.ArrayList;
@@ -183,7 +181,6 @@ public class CartAdapter  extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             totals += item.getCost() * Integer.parseInt(item.getQuantity_order());
         }
         total.setText(CurrencyFormatter.formatCurrency(totals));
-
     }
 
     public CartAdapter(Context context, List<CartModel> cartModels, List<ExtendProductModel> extendProductModels, CheckBox selectAllCheckbox, TextView textView){

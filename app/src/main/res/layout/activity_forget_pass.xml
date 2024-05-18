@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Sauvignon_red"
-    tools:context=".auth.ForgetPassActivity">
+    tools:context=".view.auth.ForgetPassActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
