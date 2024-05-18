@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.fithou.ecovn.menu.AccountMenu;
-import com.fithou.ecovn.menu.CartMenu;
-import com.fithou.ecovn.menu.HomeMenu;
-import com.fithou.ecovn.menu.NotificationMenu;
+import com.fithou.ecovn.view.dashboard.AccountMenuFragment;
+import com.fithou.ecovn.view.dashboard.CartMenuFagment;
+import com.fithou.ecovn.view.dashboard.HomeMenuFragment;
+import com.fithou.ecovn.view.dashboard.NotificationMenuFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
@@ -20,10 +20,10 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case 0: return new HomeMenu();
-            case 1: return new CartMenu();
-            case 2: return new NotificationMenu();
-            default: return new AccountMenu();
+            case 0: return new HomeMenuFragment();
+            case 1: return new CartMenuFagment();
+            case 2: return new NotificationMenuFragment();
+            default: return new AccountMenuFragment();
         }
     }
 

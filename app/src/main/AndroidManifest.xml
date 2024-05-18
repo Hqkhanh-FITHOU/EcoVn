@@ -10,62 +10,63 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.EcoVn"
+        tools:targetApi="31">
 
-        tools:targetApi="31"
-        >
         <activity
-            android:name=".sub_activity.EditProduct"
+            android:name=".view.product.EditProduct"
             android:exported="false" />
         <activity
-            android:name=".sub_activity.PaymentActivity"
+            android:name=".view.payment.PaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".sub_activity.MyStoreActivity"
+            android:name="com.fithou.ecovn.view.shop.MyShopActivity"
             android:exported="false" />
         <activity
-            android:name=".sub_activity.AskCreateShop"
+            android:name=".view.shop.AskCreateShop"
             android:exported="false" />
         <activity
-            android:name=".sub_activity.CreateShop"
+            android:name="com.fithou.ecovn.view.shop.CreateShop"
             android:exported="false" />
         <activity
-            android:name=".sub_activity.StoreActivity"
+            android:name=".view.shop.ShopActivity"
             android:exported="false" />
         <activity
-            android:name=".sub_activity.SearchActivity"
+            android:name=".view.search.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".sub_activity.ProductDetailActivity"
+            android:name=".view.product.ProductDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".sub_activity.AddProduct"
+            android:name=".view.product.AddProduct"
             android:exported="false" />
         <activity
-            android:name=".sub_activity.SeeMoreCategory"
+            android:name=".view.category.SeeMoreCategory"
             android:exported="false" />
         <activity
-            android:name=".auth.ForgetPassActivity"
+            android:name=".view.auth.ForgetPassActivity"
             android:exported="false" />
         <activity
-            android:name=".auth.RegisterActivity"
+            android:name=".view.auth.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustNothing" />
-        <activity
-            android:name=".auth.LoginActivity"
-            android:exported="true">
+            android:name=".view.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.auth.LoginActivity"
+            android:exported="false">
+
         </activity>
     </application>
 

@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/search_menu_item_toolbar"
+        android:title="Search"
+        android:icon="@drawable/round_search_24"
+        app:showAsAction="always"
+        android:iconTint="@color/Free_Speech_Blue"
+        />
+    <item
         android:id="@+id/chat_menu_item_toolbar"
         android:title="Chat"
         android:icon="@drawable/baseline_chat_bubble_24"

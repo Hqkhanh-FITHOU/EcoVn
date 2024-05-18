@@ -30,6 +30,18 @@ public class authModels implements Serializable {
         this.password = password;
     }
 
+    public authModels(String id, String name, String email, String password, boolean gender, String phone, String address, String date_of_birth, String image, boolean isShop) {
+        Id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+        this.phone = phone;
+        this.address = address;
+        this.date_of_birth = date_of_birth;
+        this.image = image;
+        this.isShop = isShop;
+    }
 
     public authModels() {
     }

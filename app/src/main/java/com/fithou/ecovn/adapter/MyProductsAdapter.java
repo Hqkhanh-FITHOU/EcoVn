@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fithou.ecovn.R;
-import com.fithou.ecovn.custom_view.MyProgressDialog;
+import com.fithou.ecovn.view.component.MyProgressDialog;
 import com.fithou.ecovn.model.product.ProductsModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

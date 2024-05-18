@@ -1,33 +1,29 @@
 package com.fithou.ecovn.adapter;
 
-import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fithou.ecovn.MainActivity;
+import com.fithou.ecovn.view.MainActivity;
 import com.fithou.ecovn.R;
-import com.fithou.ecovn.auth.LoginActivity;
-import com.fithou.ecovn.custom_view.MyProgressDialog;
+import com.fithou.ecovn.view.auth.LoginActivity;
+import com.fithou.ecovn.view.component.MyProgressDialog;
 import com.fithou.ecovn.model.AccountFeatureViewModel;
 import com.fithou.ecovn.model.authModels;
-import com.fithou.ecovn.sub_activity.AskCreateShop;
-import com.fithou.ecovn.sub_activity.MyStoreActivity;
+import com.fithou.ecovn.view.shop.AskCreateShop;
+import com.fithou.ecovn.view.shop.MyShopActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
@@ -41,6 +37,10 @@ public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAd
     FirebaseFirestore db;
 
     public AccountFeatureAdapter(authModels user) {
+        this.user = user;
+    }
+
+    public void updateUser(authModels user){
         this.user = user;
     }
 
@@ -91,7 +91,7 @@ public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAd
                                         if(task.isSuccessful()){
                                             if(!task.getResult().isEmpty()){
                                                 DocumentSnapshot doc = task.getResult().getDocuments().get(0);
-                                                Intent intent = new Intent(view.getContext(), MyStoreActivity.class);
+                                                Intent intent = new Intent(view.getContext(), MyShopActivity.class);
                                                 intent.putExtra("shop_id", doc.getId());
 
                                                 view.getContext().startActivity(intent);
@@ -143,16 +143,13 @@ public class AccountFeatureAdapter extends RecyclerView.Adapter<AccountFeatureAd
         private ImageView icon_feature;
         private TextView feature_name;
 
-        private RelativeLayout feature_layout;
+        private CardView feature_layout;
         public AccountFeatureViewHolder(@NonNull View itemView) {
             super(itemView);
             icon_feature = itemView.findViewById(R.id.account_feature_icon);
             feature_name = itemView.findViewById(R.id.account_feature_name);
             feature_layout = itemView.findViewById(R.id.account_feature_layout);
         }
-
-
-
     }
 
 }
