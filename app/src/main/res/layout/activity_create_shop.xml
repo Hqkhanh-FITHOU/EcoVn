@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.shop.product.CreateShop">
+    android:background="@color/colorSurfaceBright"
+    tools:context=".view.shop.CreateShop">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -105,15 +106,16 @@
     <Button
         android:id="@+id/btn_create_shop"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:text="Hoàn tất"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:backgroundTint="@color/Free_Speech_Blue"
         android:layout_marginStart="48dp"
+        android:textSize="18dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="48dp"
-        android:background="@drawable/border_button"
+        style="@style/Widget.Material3.Button"
         android:layout_below="@+id/create_shop_description"
         />
 </RelativeLayout>

@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:menu="@menu/account_appbar_menu"
-                android:background="@color/white"
+
                 android:paddingBottom="18dp"
                 android:layout_marginBottom="5dp">
                 <RelativeLayout
@@ -30,11 +30,12 @@
                     <Button
                         android:id="@+id/btn_login"
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:paddingHorizontal="20dp"
                         android:text="Đăng nhập"
-                        android:background="@drawable/border_button"
-                        android:backgroundTint="@color/Free_Speech_Blue"
+                        style="@style/Widget.Material3.Button"
+                        android:textSize="16dp"
+                        android:backgroundTint="@color/colorPrimary"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:layout_marginEnd="15dp"
@@ -42,11 +43,13 @@
                     <Button
                         android:id="@+id/btn_register"
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:text="Đăng ký"
+                        android:backgroundTint="@color/colorPrimary"
                         android:paddingHorizontal="20dp"
                         android:textAllCaps="false"
-                        android:background="@drawable/border_button"
+                        style="@style/Widget.Material3.Button"
+                        android:textSize="16dp"
                         android:layout_toRightOf="@+id/btn_login"/>
                 </RelativeLayout>
                 <RelativeLayout

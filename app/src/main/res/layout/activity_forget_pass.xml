@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Sauvignon_red"
+    android:background="@color/app_background"
     tools:context=".view.auth.ForgetPassActivity">
 
     <androidx.cardview.widget.CardView
@@ -61,7 +61,9 @@
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="60dp"
-                android:backgroundTint="@color/Free_Speech_Blue"
+                android:textSize="18dp"
+                android:backgroundTint="@color/colorPrimary"
+                style="@style/Widget.Material3.Button"
                 android:text="Lưu"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

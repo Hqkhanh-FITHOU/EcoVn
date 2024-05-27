@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +37,7 @@ public class AccountMenuFragment extends Fragment {
 
     TextView account_name;
     CircleImageView user_img;
-
+    Toolbar account_toobar;
     Button btn_login, btn_register;
     RelativeLayout authen_layout, user_infor_layout;
     public AccountMenuFragment() {}
@@ -63,6 +64,7 @@ public class AccountMenuFragment extends Fragment {
         btn_login = view.findViewById(R.id.btn_login);
         btn_register = view.findViewById(R.id.btn_register);
         user_img = view.findViewById(R.id.user_img);
+        account_toobar = view.findViewById(R.id.account_toobar);
         loadUserInfor();
 
 
@@ -99,10 +101,13 @@ public class AccountMenuFragment extends Fragment {
         if(MainActivity.CURRENT_USER != null){
             authen_layout.setVisibility(View.GONE);
             user_infor_layout.setVisibility(View.VISIBLE);
-
+            account_toobar.getMenu().getItem(0).setVisible(true);
+            account_toobar.getMenu().getItem(1).setVisible(true);
             account_name.setText(MainActivity.CURRENT_USER.getName());
             Glide.with(getActivity()).load(MainActivity.CURRENT_USER.getImage()).into(user_img);
         }else{
+            account_toobar.getMenu().getItem(0).setVisible(false);
+            account_toobar.getMenu().getItem(1).setVisible(false);
             authen_layout.setVisibility(View.VISIBLE);
             user_infor_layout.setVisibility(View.GONE);
         }

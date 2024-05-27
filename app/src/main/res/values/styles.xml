@@ -7,7 +7,7 @@
 
     <style name="Round.ImageView.2" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">3dp</item>
+        <item name="cornerSize">6dp</item>
     </style>
 
     <style name="myRatingStyle" parent="Widget.AppCompat.RatingBar.Small">
@@ -16,5 +16,36 @@
     </style>
 
 
+    <style name="ShapeAppearanceOverlay.App.Card.Media" parent="">
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+
+    <style name="Widget.App.CheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.CheckBox</item>
+    </style>
+
+    <style name="ThemeOverlay.App.CheckBox" parent="">
+        <!-- Container colors -->
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorError">@color/white</item>
+
+        <!-- Icon colors -->
+        <item name="colorSurface">@color/Free_Speech_Blue</item>
+        <item name="colorOnPrimary">@color/Free_Speech_Blue</item>
+        <item name="colorOnError">@color/Free_Speech_Blue</item>
+
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
+
+<style name="Widget.Material3.Button.MyOutlinedButton" parent="Widget.Material3.Button.TextButton">
+    <item name="android:paddingLeft">@dimen/m3_btn_padding_left</item>
+    <item name="android:paddingRight">@dimen/m3_btn_padding_right</item>
+    <item name="strokeColor">@color/colorOnSurface</item>
+    <item name="strokeWidth">@dimen/m3_comp_outlined_button_outline_width</item>
+</style>
 
 </resources>

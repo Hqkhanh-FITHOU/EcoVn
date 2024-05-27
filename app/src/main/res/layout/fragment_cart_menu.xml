@@ -4,15 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00E3E3E3"
     tools:context=".view.dashboard.CartMenuFagment">
-
-    <!-- TODO: Update blank fragment layout -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/cart_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -61,9 +57,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/border_button"
         android:translationZ="1dp"
+        android:visibility="gone"
+        android:backgroundTint="@color/colorSecondaryContainer"
         android:paddingHorizontal="15dp"
         android:paddingVertical="8dp"
-        android:backgroundTint="@color/Free_Speech_Blue"
         android:layout_marginBottom="8dp"
         android:layout_marginHorizontal="8dp"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -73,10 +70,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:textColor="@color/white"
+            android:textColor="@color/colorOnSecondary"
             android:text="Chọn tất cả"
+            android:checked="false"
             android:textSize="14sp"
-            android:buttonTint="@color/white"/>
+            android:button="@drawable/custom_checkbox"
+            android:buttonTint="@color/checkbox_color"
+            />
 
         <TextView
             android:layout_below="@+id/checkbox_select_all"
@@ -86,7 +86,7 @@
             android:layout_gravity="left"
             android:paddingBottom="5dp"
             android:text="Tổng tiền"
-            android:textColor="@color/white"
+            android:textColor="@color/colorOnSecondary"
             android:textSize="18dp"
  />
 
@@ -99,20 +99,21 @@
             android:layout_gravity="right"
             android:paddingBottom="5dp"
             android:text="0 đ"
-            android:textColor="@color/white"
+            android:textColor="@color/colorOnSecondary"
             android:textSize="18dp" />
 
         <Button
             android:id="@+id/btn_save"
+            style="@style/Widget.Material3.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_total"
-            android:layout_marginTop="16dp"
             android:layout_marginHorizontal="0dp"
-            android:background="@drawable/border_button"
-            android:backgroundTint="@color/white"
+            android:layout_marginTop="17dp"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Mua hàng"
-            android:textColor="@color/Free_Speech_Blue" />
+            android:textColor="@color/white"
+            android:textSize="16dp" />
     </RelativeLayout>
 
     <TextView
@@ -131,18 +132,29 @@
     <Button
         android:id="@+id/btn_login_to_user_cart"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="Đăng nhập"
-        android:paddingHorizontal="20dp"
-        android:textAllCaps="false"
-        android:visibility="gone"
-        android:textColor="@color/white"
-        android:background="@drawable/border_button"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Button"
         android:backgroundTint="@color/Free_Speech_Blue"
+        android:paddingHorizontal="20dp"
+        android:textSize="16dp"
+        android:text="Đăng nhập"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cart_toolbar"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintTop_toBottomOf="@+id/cart_toolbar" />
+
+    <ImageView
+        android:id="@+id/shopping_img_view"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/shopping_cart"
+        app:layout_constraintBottom_toTopOf="@+id/txt_no_product"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.fithou.ecovn.view.dashboard.NotificationMenuFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.fithou.ecovn.R.id;
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     FirebaseFirestore db;
     public static authModels CURRENT_USER;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,55 +80,27 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 
-    private void checkCartExist() {
-        db = FirebaseFirestore.getInstance();
-        db.collection("cart").whereEqualTo("user_id",CURRENT_USER.getId()).get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (queryDocumentSnapshots.isEmpty()){
-                            //Toast.makeText(MainActivity.this, "Cart is not exist", Toast.LENGTH_SHORT).show();
-                            createCartOnFireStore();
-                        }else{
-                            //Toast.makeText(MainActivity.this, "Cart is exist", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
 
-    private void createCartOnFireStore() {
-        db = FirebaseFirestore.getInstance();
-        Map<String, Object> data = new HashMap<>();
-        data.put("user_id", CURRENT_USER.getId());
-        data.put("cart_id","");
-        data.put("product", new ArrayList<>());
-        data.put("total", "");
-        db.collection("cart").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                db.collection("cart").document(documentReference.getId()).update("cart_id", documentReference.getId()).addOnSuccessListener(unused -> {
-                    //Toast.makeText(MainActivity.this, "Cart is exist", Toast.LENGTH_SHORT).show();
-                });
-            }
-        });
-    }
 
-    private void checkShop(authModels user){
-        db = FirebaseFirestore.getInstance();
-        db.collection("users").document(user.getId())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()){
-                            DocumentSnapshot doc = task.getResult();
-                            user.setShop(doc.getBoolean("shop"));
-                        }
-                    }
-                });
-    }
+
+
+//    private void checkShop(authModels user){
+//        db = FirebaseFirestore.getInstance();
+//        db.collection("users").document(user.getId())
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            DocumentSnapshot doc = task.getResult();
+//                            user.setShop(doc.getBoolean("shop"));
+//                        }
+//                    }
+//                });
+//    }
 
     public void setBottomNavigationSelectedItem(int position){
         switch (position) {
@@ -149,5 +125,14 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(position);
 
         Log.w("Selected", "Navigation: "+position);
+    }
+
+    public void setBadgeBottomNavigation(int index){
+        if(index == 1){  //for cart screen
+            BadgeDrawable cartBadgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.bottom_cart);
+            cartBadgeDrawable.setBackgroundColor(getResources().getColor(R.color.red));
+            cartBadgeDrawable.setBadgeTextColor(getResources().getColor(R.color.white));
+            cartBadgeDrawable.setVisible(true);
+        }
     }
 }

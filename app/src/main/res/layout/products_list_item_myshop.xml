@@ -4,7 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginHorizontal="5dp"
     android:layout_marginVertical="5dp"
-    android:id="@+id/product_layout">
+    app:cardCornerRadius="15dp"
+    android:backgroundTint="@color/colorSurfaceContainer"
+    android:id="@+id/product_layout"
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,20 +15,20 @@
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:padding="5dp">
+            android:layout_height="160dp">
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/img_products"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleType="centerInside"
+                android:scaleType="centerCrop"
                 android:src="@drawable/logo_login"
-                app:shapeAppearanceOverlay="@style/Round.ImageView.2"/>
+                />
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
             <TextView
                 android:id="@+id/name_products"
                 android:layout_width="match_parent"
@@ -96,9 +99,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sửa"
+                android:textSize="15sp"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/green"
+                android:backgroundTint="@color/colorPrimary"
                 android:textAllCaps="false"
+                style="@style/Widget.Material3.Button"
                 android:layout_marginHorizontal="5dp"
                 android:layout_below="@+id/cost_products"/>
 
@@ -107,8 +112,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Xóa"
+                android:textSize="15sp"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/red"
+                android:backgroundTint="@color/colorError"
+                style="@style/Widget.Material3.Button"
                 android:textAllCaps="false"
                 android:layout_marginHorizontal="5dp"
                 android:layout_marginBottom="5dp"

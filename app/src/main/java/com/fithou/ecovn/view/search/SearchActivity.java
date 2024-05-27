@@ -10,8 +10,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fithou.ecovn.R;
@@ -22,6 +25,7 @@ import com.fithou.ecovn.model.product.ProductsModel;
 import com.fithou.ecovn.view.product.ProductDetailActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.search.SearchBar;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -36,6 +40,7 @@ import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
     ImageView btn_back_to_home;
+    SearchBar search_activity_search_bar;
 
     ArrayList<ProductsModel> productsModelList, listTemp;
 
@@ -44,33 +49,25 @@ public class SearchActivity extends AppCompatActivity {
     ProductsAdapter productsAdapter;
     CategoryModel categoryModel;
 
-    int SEARCH_ACTIVE = 0;
 
-    androidx.appcompat.widget.SearchView searchView;
+
+    com.google.android.material.search.SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
+        btn_back_to_home = findViewById(R.id.btn_back_to_home);
         searchView = findViewById(R.id.search_view_search_screen);
+        search_activity_search_bar = findViewById(R.id.search_activity_search_bar);
 
         Intent intent  = getIntent();
-        SEARCH_ACTIVE = intent.getIntExtra("search", 0);
-        if(SEARCH_ACTIVE == 1){
-            searchView.setIconified(false);
-            searchView.requestFocus();
-            InputMethodManager inputMethodManager = (InputMethodManager) searchView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputMethodManager.showSoftInput(searchView, InputMethodManager.SHOW_IMPLICIT);
-        }
-        btn_back_to_home = findViewById(R.id.btn_back_to_home);
+
         firestore = FirebaseFirestore.getInstance();
         categoryModel = (CategoryModel) intent.getSerializableExtra("CATEGORY_ID");
 
         productsModelList = new ArrayList<>();
         productsAdapter = new ProductsAdapter(this,productsModelList);
         productRecyclerView = findViewById(R.id.products_list);
-        GridLayoutManager gridLayoutProductManager = new GridLayoutManager(this, 3);
-        productRecyclerView.setLayoutManager(gridLayoutProductManager);
         productRecyclerView.setAdapter(productsAdapter);
 
         onClickBack();
@@ -82,28 +79,38 @@ public class SearchActivity extends AppCompatActivity {
 
     };
 
+//    private void onSearch() {
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                    searchProduct(query);
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
+//
+//        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+//            @Override
+//            public boolean onClose() {
+//                productsAdapter.setViewData(productsModelList);
+//                productsAdapter.notifyDataSetChanged();
+//                return false;
+//            }
+//        });
+//    }
+
     private void onSearch() {
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                    searchProduct(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
+        searchView.getEditText().setOnEditorActionListener((v, actionId, event) -> {
+            search_activity_search_bar.setText(searchView.getText());
+            searchView.hide();
+            return false;
         });
 
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                productsAdapter.setViewData(productsModelList);
-                productsAdapter.notifyDataSetChanged();
-                return false;
-            }
-        });
+        
     }
 
     private void onClickBack() {

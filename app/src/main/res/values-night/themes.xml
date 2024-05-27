@@ -2,6 +2,32 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.EcoVn" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">#bac3ff</item>
+        <item name="colorSecondary">#c3c5dd</item>
+        <item name="colorOnSecondary">#2d2f42</item>
+        <item name="colorTertiary">#e6bad7</item>
+        <item name="colorOnTertiary">#44263d</item>
+        <item name="colorError">#ffb4ab</item>
+        <item name="colorOnError">#690005</item>
+        <item name="colorPrimaryContainer">#394379</item>
+        <item name="colorOnPrimaryContainer">#dee0ff</item>
+        <item name="colorSecondaryContainer">#434659</item>
+        <item name="colorOnSecondaryContainer">#e0e1f9</item>
+        <item name="colorTertiaryContainer">#5d3c55</item>
+        <item name="colorOnTertiaryContainer">#ffd7f1</item>
+        <item name="colorErrorContainer">#93000a</item>
+        <item name="colorOnErrorContainer">#ffdad6</item>
+        <item name="colorSurfaceDim">#121318</item>
+        <item name="colorSurface">#121318</item>
+        <item name="colorSurfaceBright">#39393f</item>
+        <item name="colorOnSurface">#e4e1e9</item>
+        <item name="colorOnSurfaceVariant">#c7c5d0</item>
+        <item name="colorOutline">#90909a</item>
+        <item name="colorOutlineVariant">#46464f</item>
+        <item name="colorSurfaceInverse">#e4e1e9</item>
+        <item name="colorOnSurfaceInverse">#303036</item>
+        <item name="colorPrimaryInverse">#515b92</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="scrimBackground">#000000</item>
     </style>
 </resources>

@@ -90,32 +90,27 @@ public class CartAdapter  extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             }
         });
 
-        holder.minus_quantity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int quantity =Integer.parseInt(extendProductModel.getQuantity_order());
-                String quantity_string = String.valueOf(quantity -1);
-                if (quantity > 0) {
-                    extendProductModel.setQuantity_order(quantity_string);
-                    holder.quantity.setText(quantity_string);
-                    holder.cost.setText(CurrencyFormatter.formatCurrency( extendProductModel.getCost() * Integer.parseInt(extendProductModel.getQuantity_order())));
-                    getTotalPrice();
-                }
-            }
-        });
-
-        holder.plus_quantity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int quantity =Integer.parseInt(extendProductModel.getQuantity_order());
-                String quantity_string = String.valueOf(quantity +1);
+        holder.minus_quantity.setOnClickListener(view -> {
+            int quantity = Integer.parseInt(extendProductModel.getQuantity_order());
+            String quantity_string = String.valueOf(quantity -1);
+            if (quantity > 1) {
                 extendProductModel.setQuantity_order(quantity_string);
                 holder.quantity.setText(quantity_string);
                 holder.cost.setText(CurrencyFormatter.formatCurrency( extendProductModel.getCost() * Integer.parseInt(extendProductModel.getQuantity_order())));
                 getTotalPrice();
             }
         });
+
+        holder.plus_quantity.setOnClickListener(view -> {
+            int quantity =Integer.parseInt(extendProductModel.getQuantity_order());
+            String quantity_string = String.valueOf(quantity +1);
+            extendProductModel.setQuantity_order(quantity_string);
+            holder.quantity.setText(quantity_string);
+            holder.cost.setText(CurrencyFormatter.formatCurrency( extendProductModel.getCost() * Integer.parseInt(extendProductModel.getQuantity_order())));
+            getTotalPrice();
+        });
     }
+
     public void setAllSelected(boolean selected) {
         allChecked = selected;
         if(selected){

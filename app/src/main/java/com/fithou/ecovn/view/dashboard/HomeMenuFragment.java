@@ -101,8 +101,6 @@ public class HomeMenuFragment extends Fragment {
         categoryModelList = new ArrayList<>();
         categoryAdapter = new CategoryAdapter(getContext(),categoryModelList);
         categoryRecyclerView = view.findViewById(R.id.category_list);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 5);
-        categoryRecyclerView.setLayoutManager(gridLayoutManager);
         categoryRecyclerView.setAdapter(categoryAdapter);
 
         discountModelList = new ArrayList<>();
@@ -115,8 +113,6 @@ public class HomeMenuFragment extends Fragment {
         productsModelList = new ArrayList<>();
         productsAdapter = new ProductsAdapter(getContext(),productsModelList);
         productRecyclerView = view.findViewById(R.id.products_list);
-        GridLayoutManager gridLayoutProductManager = new GridLayoutManager(getContext(), 3);
-        productRecyclerView.setLayoutManager(gridLayoutProductManager);
         productRecyclerView.setAdapter(productsAdapter);
 
         loadImageSlider();
