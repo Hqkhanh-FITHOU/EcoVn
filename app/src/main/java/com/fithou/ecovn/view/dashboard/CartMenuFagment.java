@@ -71,7 +71,7 @@ public class CartMenuFagment extends Fragment {
     private CheckBox checkAllSelect;
     private TextView total, txt_no_product;
     private RelativeLayout frame_total;
-    private ImageView img_delete;
+    private ImageView img_delete, shopping_img_view;
     ProgressDialog progressDialog;
 
     private Button btn_save, btn_login_to_user_cart;
@@ -111,6 +111,7 @@ public class CartMenuFagment extends Fragment {
         txt_no_product = view.findViewById(R.id.txt_no_product);
         frame_total = view.findViewById(R.id.frame_total);
         btn_login_to_user_cart = view.findViewById(R.id.btn_login_to_user_cart);
+        shopping_img_view = view.findViewById(R.id.shopping_img_view);
 
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Xóa sản phẩm khỏi giỏ hàng");
@@ -130,6 +131,7 @@ public class CartMenuFagment extends Fragment {
             txt_no_product.setVisibility(View.VISIBLE);
             txt_no_product.setText("Đăng nhập để mua sắm ngay");
             frame_total.setVisibility(View.GONE);
+            shopping_img_view.setVisibility(View.VISIBLE);
         }
 
         checkAllSelected();
@@ -243,60 +245,36 @@ public class CartMenuFagment extends Fragment {
         firestore.collection("product")
                 .whereIn("product_id",productIdsList)
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()){
-                            btn_login_to_user_cart.setVisibility(View.GONE);
-                            txt_no_product.setVisibility(View.GONE);
-                            frame_total.setVisibility(View.VISIBLE);
-                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                ExtendProductModel item = documentSnapshot.toObject(ExtendProductModel.class);
-                                productsModelList.add(item);
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()){
+                        btn_login_to_user_cart.setVisibility(View.GONE);
+                        txt_no_product.setVisibility(View.GONE);
+                        frame_total.setVisibility(View.VISIBLE);
+                        shopping_img_view.setVisibility(View.GONE);
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            ExtendProductModel item = documentSnapshot.toObject(ExtendProductModel.class);
+                            productsModelList.add(item);
 
-                                for (CartModel cartModel: cartModels){
-                                    for (ProductCartModel productCartModel : cartModel.getProductCartModel())
-                                        if(productCartModel.getProduct_id().equals(item.getProduct_id())){
-                                            item.setQuantity_order(productCartModel.getQuantity_order());
-                                        }
-                                }
-//                            List<HashMap<String, Object>> commentDataList = (List<HashMap<String, Object>>) documentSnapshot.get("comment");
-//                            if (commentDataList != null) {
-//                                List<Comment> commentList = new ArrayList<>();
-//                                for (HashMap<String, Object> commentData : commentDataList) {
-//                                    String userId = (String) commentData.get("user_id");
-//                                    String content = (String) commentData.get("content");
-//                                    int star = ((Long) commentData.get("star")).intValue();
-//                                    String dateTimeString = (String) commentData.get("date_time");
-//
-//                                    // Chuyển đổi giá trị String sang kiểu DateTime
-//                                    if (dateTimeString != null && !dateTimeString.isEmpty()){
-//                                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                                        Date dateTime = null;
-//                                        try {
-//                                            dateTime = dateFormat.parse(dateTimeString);
-//                                        } catch (ParseException e) {
-//                                            e.printStackTrace();
-//                                        }
-//
-//                                        Comment comment = new Comment(userId, content, star, dateTime);
-//                                        commentList.add(comment);
-//                                    }
-//                                }
-//                                item.setComment(commentList);
-//                            }
-                                extendProductModels.add(item);
+                            for (CartModel cartModel: cartModels){
+                                for (ProductCartModel productCartModel : cartModel.getProductCartModel())
+                                    if(productCartModel.getProduct_id().equals(item.getProduct_id())){
+                                        item.setQuantity_order(productCartModel.getQuantity_order());
+                                    }
                             }
-                            cartAdapter.setViewData(cartModels,extendProductModels);
-                            cartAdapter.notifyDataSetChanged();
-                            progressDialog.dismiss();
-                        }else{
-                            btn_login_to_user_cart.setVisibility(View.GONE);
-                            txt_no_product.setText("Chưa có sản phẩm trong giỏ");
-                            txt_no_product.setVisibility(View.VISIBLE);
-                            frame_total.setVisibility(View.GONE);
-                            progressDialog.dismiss();
+                            extendProductModels.add(item);
                         }
+                        cartAdapter.setViewData(cartModels,extendProductModels);
+                        cartAdapter.notifyDataSetChanged();
+                        MainActivity mainActivity = (MainActivity) getActivity();
+                        mainActivity.setBadgeBottomNavigation(1);
+                        progressDialog.dismiss();
+                    }else{
+                        btn_login_to_user_cart.setVisibility(View.GONE);
+                        txt_no_product.setText("Chưa có sản phẩm trong giỏ");
+                        txt_no_product.setVisibility(View.VISIBLE);
+                        frame_total.setVisibility(View.GONE);
+                        progressDialog.dismiss();
+                        shopping_img_view.setVisibility(View.VISIBLE);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -371,6 +349,7 @@ public class CartMenuFagment extends Fragment {
                                     txt_no_product.setText("Chưa có sản phẩm trong giỏ");
                                     txt_no_product.setVisibility(View.VISIBLE);
                                     frame_total.setVisibility(View.GONE);
+                                    shopping_img_view.setVisibility(View.VISIBLE);
                                 }
                                 cartAdapter = new CartAdapter(getContext(),cartModels, extendProductModels,checkAllSelect, total);
 
@@ -391,12 +370,9 @@ public class CartMenuFagment extends Fragment {
                             }
                         });
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Toast.makeText(getContext(), "Xóa thất bại ... ", Toast.LENGTH_SHORT).show();
-            }
+        }).addOnFailureListener(e -> {
+            progressDialog.dismiss();
+            Toast.makeText(getContext(), "Xóa thất bại ... ", Toast.LENGTH_SHORT).show();
         });
     }
     private void getProductIds() {
@@ -410,6 +386,12 @@ public class CartMenuFagment extends Fragment {
         }
         if(!productIdsList.isEmpty()){
             loadProductFromFirebase();
+        }else{
+            btn_login_to_user_cart.setVisibility(View.GONE);
+            txt_no_product.setText("Chưa có sản phẩm trong giỏ");
+            txt_no_product.setVisibility(View.VISIBLE);
+            frame_total.setVisibility(View.GONE);
+            shopping_img_view.setVisibility(View.VISIBLE);
         }
     }
 }

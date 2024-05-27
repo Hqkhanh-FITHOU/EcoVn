@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorSurfaceBright"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
@@ -14,9 +15,11 @@
             android:layout_gravity="center">
             <ImageView
                 android:id="@+id/img_edit_product"
-                android:layout_width="230dp"
-                android:layout_height="240dp"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
                 android:src="@drawable/logo"
+                style="@style/Round.ImageView.2"
+                android:scaleType="centerInside"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
@@ -24,12 +27,12 @@
             <Button
                 android:id="@+id/btn_choose_img"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="Chọn ảnh"
+                android:textSize="14dp"
+                style="@style/Widget.Material3.Button.MyOutlinedButton"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/Free_Speech_Blue"
-                android:background="@drawable/border_button"
+                android:textColor="@color/colorPrimary"
                 android:layout_gravity="center"
                 />
         </LinearLayout>
@@ -171,29 +174,31 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:layout_marginHorizontal="30dp"
+            android:layout_marginHorizontal="40dp"
             android:layout_marginTop="32dp">
 
             <Button
                 android:id="@+id/btn_edit_confirm"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:text="Cập nhật"
+                android:textSize="18dp"
+                android:backgroundTint="@color/colorPrimary"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/Free_Speech_Blue"
-                android:background="@drawable/border_button"
+                style="@style/Widget.Material3.Button"
                 android:layout_gravity="center"
                 />
             <Button
                 android:id="@+id/btn_edit_cancel"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:text="Hủy"
+                android:textSize="18dp"
                 android:layout_marginTop="20dp"
                 android:textAllCaps="false"
+                style="@style/Widget.Material3.Button.MyOutlinedButton"
                 android:textColor="@color/Free_Speech_Blue"
-                android:background="@drawable/border_button"
                 android:layout_gravity="center"
                 android:layout_marginBottom="40dp"
                 />

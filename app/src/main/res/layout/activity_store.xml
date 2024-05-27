@@ -5,13 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorSurface"
     tools:context=".view.shop.ShopActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        android:background="@android:color/transparent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/shop_collapsingtoobarlayout"
@@ -24,7 +25,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="216dp"
                 android:scaleType="centerCrop"
-                android:alpha="0.5"
+                android:alpha="0.4"
+                android:background="@color/colorSecondary"
                 android:src="@drawable/logo_login"
                 app:layout_collapseMode="parallax" />
 
@@ -71,9 +73,9 @@
                     android:layout_height="40dp"
                     android:text="Theo dõi"
                     android:textAllCaps="false"
-                    android:textColor="@color/Free_Speech_Blue"
+                    android:backgroundTint="@color/colorPrimary"
                     android:textSize="16sp"
-                    android:background="@drawable/border_button"
+                    style="@style/Widget.Material3.Button"
                     android:layout_alignParentRight="true"
                     android:layout_marginVertical="13dp"/>
             </RelativeLayout>
@@ -84,8 +86,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:id="@+id/shop_toolbar"
                 app:layout_collapseMode="pin"
-                android:layout_marginBottom="48dp"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark">
+                android:layout_marginBottom="48dp">
                 <ImageView
                     android:id="@+id/btn_back_shop"
                     android:layout_width="40dp"
@@ -99,9 +100,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="@color/white"
-                app:tabIndicatorColor="@color/Free_Speech_Blue"
-                app:tabSelectedTextColor="@color/Free_Speech_Blue"
+                app:tabTextColor="@color/colorOnSecondary"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                android:background="@android:color/transparent"
+                style="@style/Widget.Material3.TabLayout"
                 />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

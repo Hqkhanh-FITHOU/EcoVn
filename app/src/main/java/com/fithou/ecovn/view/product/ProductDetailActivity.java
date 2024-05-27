@@ -125,7 +125,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         }else{
             currentUser = "";
         }
-        Log.d("Current user ", MainActivity.CURRENT_USER.getId());
+        //Log.d("Current user ", MainActivity.CURRENT_USER.getId());
         }
 
 
@@ -228,40 +228,42 @@ public class ProductDetailActivity extends AppCompatActivity {
     private void onAddToCart(){
         final String[] cartId = {""};
         ArrayList<ProductCartModel> cartData = new ArrayList<>();
-        firestore.collection("cart")
-                .whereEqualTo("user_id", MainActivity.CURRENT_USER.getId())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+        if(MainActivity.CURRENT_USER != null){
+            firestore.collection("cart")
+                    .whereEqualTo("user_id", MainActivity.CURRENT_USER.getId())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            CartModel item = documentSnapshot.toObject(CartModel.class);
+                            for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                CartModel item = documentSnapshot.toObject(CartModel.class);
 
-                            cartId[0] = item.getCart_id();
-                            List<HashMap<String, Object>> productDataList = (List<HashMap<String, Object>>) documentSnapshot.get("product");
-                            if (productDataList != null) {
-                                List<ProductCartModel> productCartModels = new ArrayList<>();
-                                for (HashMap<String, Object> productData : productDataList) {
-                                    String product_id = (String) productData.get("product_id");
-                                    String quantity_order = (String) productData.get("quantity_order");
-                                    ProductCartModel productCartModel = new ProductCartModel(product_id, quantity_order);
-                                    productCartModels.add(productCartModel);
-                                    cartData.add(productCartModel);
+                                cartId[0] = item.getCart_id();
+                                List<HashMap<String, Object>> productDataList = (List<HashMap<String, Object>>) documentSnapshot.get("product");
+                                if (productDataList != null) {
+                                    List<ProductCartModel> productCartModels = new ArrayList<>();
+                                    for (HashMap<String, Object> productData : productDataList) {
+                                        String product_id = (String) productData.get("product_id");
+                                        String quantity_order = (String) productData.get("quantity_order");
+                                        ProductCartModel productCartModel = new ProductCartModel(product_id, quantity_order);
+                                        productCartModels.add(productCartModel);
+                                        cartData.add(productCartModel);
+                                    }
+                                    item.setProductCartModel(productCartModels);
                                 }
-                                item.setProductCartModel(productCartModels);
                             }
+
+                            cartIds = cartId[0];
+
                         }
-
-                        cartIds = cartId[0];
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("Firestore", "Error getting data", e);
-                    }
-                });
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e("Firestore", "Error getting data", e);
+                        }
+                    });
+        }
         btn_add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

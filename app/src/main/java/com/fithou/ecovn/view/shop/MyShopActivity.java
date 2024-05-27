@@ -30,6 +30,7 @@ import com.fithou.ecovn.view.product.AddProduct;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -116,12 +117,12 @@ public class MyShopActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             DocumentSnapshot doc = task.getResult();
-                            my_shop_name.setText((String) doc.get("name"));
-                            phone_number.setText((String) doc.get("phone_number"));
+                            //my_shop_name.setText((String) doc.get("name"));
+                            //phone_number.setText((String) doc.get("phone_number"));
 
-                            Glide.with(MyShopActivity.this)
-                                    .load(doc.get("img_shop") == "" ? R.mipmap.ic_launcher : doc.get("img_shop"))
-                                    .into(my_shop_img);
+//                            Glide.with(MyShopActivity.this)
+//                                    .load(doc.get("img_shop") == "" ? R.mipmap.ic_launcher : doc.get("img_shop"))
+//                                    .into(my_shop_img);
                         }
                     }
                 });
@@ -139,8 +140,8 @@ public class MyShopActivity extends AppCompatActivity {
         my_shop_tablayout = findViewById(R.id.my_shop_tablayout);
         my_shop_toolbar = findViewById(R.id.my_shop_toolbar);
         my_shop_img_certificate_business = findViewById(R.id.my_shop_img_certificate_business);
-        my_shop_img = findViewById(R.id.my_shop_img);
-        my_shop_name = findViewById(R.id.my_shop_name);
+        //my_shop_img = findViewById(R.id.my_shop_img);
+        //my_shop_name = findViewById(R.id.my_shop_name);
         phone_number = findViewById(R.id.phone_number);
         btn_back_my_shop = findViewById(R.id.btn_back_my_shop);
         collapsingToolbarLayout = findViewById(R.id.my_shop_collapsingtoobarlayout);

@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorSurface"
     tools:context=".view.product.ProductDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/detail_product_toolbar">
+        android:id="@+id/detail_product_toolbar"
+        style="@style/Widget.Material3.Toolbar">
         <ImageView
             android:id="@+id/btn_back_product_detail"
             android:layout_width="40dp"
@@ -40,7 +42,7 @@
                 />
 
             <RelativeLayout
-                android:background="@color/white"
+                android:background="@color/colorSurfaceContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp">
@@ -68,11 +70,13 @@
                     android:textColor="@color/Free_Speech_Blue"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
+
                 <TextView
                     android:id="@+id/name_product_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
+                    android:textColor="@color/black"
                     android:layout_below="@+id/price_product_detail"
                     android:text="Tên sản phẩm"
                     android:textSize="16sp"
@@ -142,11 +146,12 @@
                     android:layout_marginEnd="15dp" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:background="@color/white"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@color/colorSurfaceContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginBottom="15dp"
+                android:gravity="center_vertical"
                 android:padding="10dp"
                 >
 
@@ -154,39 +159,44 @@
                     android:id="@+id/img_shop_product_detail"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
                     android:src="@mipmap/ic_launcher"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/name_shop_product_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:text="Tên shop"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
                     android:layout_toRightOf="@+id/img_shop_product_detail"
-                    android:layout_marginStart="10dp"
                     android:gravity="center"
-                    />
+                    android:text="Tên shop"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/img_shop_product_detail"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/btn_see_shop"
-                    android:background="@drawable/border_button"
+                    style="@style/Widget.Material3.Button.MyOutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_alignParentRight="true"
                     android:text="Xem shop"
                     android:textAllCaps="false"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginEnd="3dp"
-                    />
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
-                android:background="@color/white"
+                android:background="@color/colorSurfaceContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -196,9 +206,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Mô tả chi tiết"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="15dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginStart="15dp"/>
 
                 <TextView
@@ -208,23 +219,24 @@
                     android:text="@string/lorem"
                     android:textSize="15dp"
                     android:layout_marginTop="7dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="15dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:justificationMode="inter_word"/>
             </LinearLayout>
 
             <LinearLayout
-                android:background="@color/white"
+                android:background="@color/colorSurfaceContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Đánh giá"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="15dp"
                     android:layout_marginStart="15dp"
@@ -266,7 +278,7 @@
             android:layout_height="match_parent"
             android:text="Thêm vào giỏ"
             android:gravity="center"
-            android:background="@color/Bottom_navigation_text_inactive"
+            android:background="@color/colorOutline"
             android:layout_weight="1"
             android:textColor="@color/white"
             android:drawableStart="@drawable/round_add_shopping_cart_24"

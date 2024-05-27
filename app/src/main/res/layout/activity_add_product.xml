@@ -2,6 +2,7 @@
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorSurfaceBright"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,9 +15,10 @@
             android:layout_gravity="center">
             <ImageView
                 android:id="@+id/imgProduct"
-                android:layout_width="230dp"
-                android:layout_height="240dp"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
                 android:src="@drawable/logo"
+                style="@style/Round.ImageView.2"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
@@ -24,12 +26,12 @@
             <Button
                 android:id="@+id/btn_add_img"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:text="Chọn ảnh"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/Free_Speech_Blue"
-                android:background="@drawable/border_button"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14dp"
+                style="@style/Widget.Material3.Button.MyOutlinedButton"
                 android:layout_gravity="center"
                 />
         </LinearLayout>
@@ -159,29 +161,31 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:layout_marginHorizontal="30dp"
+            android:layout_marginHorizontal="40dp"
             android:layout_marginTop="32dp">
 
             <Button
                 android:id="@+id/btn_add"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:text="Thêm"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/Free_Speech_Blue"
-                android:background="@drawable/border_button"
+                android:backgroundTint="@color/colorPrimary"
+                style="@style/Widget.Material3.Button"
+                android:textSize="18dp"
                 android:layout_gravity="center"
                 />
             <Button
                 android:id="@+id/btn_cancel"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:text="Hủy"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginTop="20dp"
                 android:textAllCaps="false"
-                android:textColor="@color/Free_Speech_Blue"
-                android:background="@drawable/border_button"
+                android:textSize="18dp"
+                style="@style/Widget.Material3.Button.MyOutlinedButton"
                 android:layout_gravity="center"
                 android:layout_marginBottom="40dp"
                 />

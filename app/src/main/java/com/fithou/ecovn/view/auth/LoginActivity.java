@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,17 +15,27 @@ import android.widget.Toast;
 
 import com.fithou.ecovn.helper.UserSingleton;
 import com.fithou.ecovn.model.authModels;
+import com.fithou.ecovn.model.cart.CartModel;
+import com.fithou.ecovn.model.cart.ProductCartModel;
 import com.fithou.ecovn.view.MainActivity;
 import com.fithou.ecovn.R;
 
 import com.fithou.ecovn.view.dashboard.AccountMenuFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     public static int LOGIN_OK = 12;
@@ -80,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                                     user.setImage(doc.getString("image"));
                                     user.setShop(doc.getBoolean("shop"));
                                     MainActivity.CURRENT_USER = user;
+                                    checkCartExist();
                                     progressDialog.dismiss();
 
                                     setResult(LOGIN_OK);
@@ -105,12 +117,33 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(i);
         });
 
-        tv_forget_pass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, ForgetPassActivity.class);
-                startActivity(i);
-            }
+        tv_forget_pass.setOnClickListener(view -> {
+            Intent i = new Intent(LoginActivity.this, ForgetPassActivity.class);
+            startActivity(i);
         });
     }
+
+    private void checkCartExist() {
+        firestore = FirebaseFirestore.getInstance();
+        firestore.collection("cart").whereEqualTo("user_id",MainActivity.CURRENT_USER.getId()).get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (queryDocumentSnapshots.isEmpty()){
+                        createCartOnFireStore();
+                    }
+                });
+    }
+
+    private void createCartOnFireStore() {
+        firestore = FirebaseFirestore.getInstance();
+        Map<String, Object> data = new HashMap<>();
+        data.put("user_id", MainActivity.CURRENT_USER.getId());
+        data.put("cart_id","");
+        data.put("product", new ArrayList<>());
+        data.put("total", "");
+        firestore.collection("cart").add(data).addOnSuccessListener(documentReference -> firestore.collection("cart").document(documentReference.getId()).update("cart_id", documentReference.getId()).addOnSuccessListener(unused -> {
+            Log.d("MainActivity", "shop created");
+        }));
+    }
+
+
 }

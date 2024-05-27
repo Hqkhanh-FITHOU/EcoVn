@@ -1,48 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorSurface"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.Material3.DayNight.NoActionBar"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/home_toolbar"
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/btn_back_to_home"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="3dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/baseline_arrow_back_24" />
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view_search_screen"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:translationZ="1dp"
+        style="@style/Widget.Material3.AppBarLayout"
+        >
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/border_search_home_toolbar"
-            android:layout_marginRight="32dp"/>
-    </androidx.appcompat.widget.Toolbar>
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+            <ImageView
+                android:id="@+id/btn_back_to_home"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginEnd="7dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_arrow_back_24" />
 
-    <RelativeLayout
-        android:id="@+id/layout_product"
+            <com.google.android.material.search.SearchBar
+                android:id="@+id/search_activity_search_bar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:hint="Tìm kiếm..."
+                android:layout_marginEnd="15dp"
+                style="@style/Widget.Material3.SearchBar"
+                app:defaultMarginsEnabled="false"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <com.google.android.material.search.SearchView
+        android:id="@+id/search_view_search_screen"
+        android:layout_width="match_parent"
+        style="@style/Widget.Material3.SearchView"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/app_background"
+        android:hint="Tìm kiếm..."
+        app:layout_anchor="@id/search_activity_search_bar">
+        <!--list of hint here-->
+    </com.google.android.material.search.SearchView>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/home_toolbar">
-        <ScrollView
-            android:id="@+id/scroll_view"
+        android:layout_marginTop="65dp"
+        app:layout_behavior="@string/searchbar_scrolling_view_behavior">
+        <!-- Screen content goes here. -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/products_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/products_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:padding="8dp"
-                android:scrollbars="none"
-                tools:itemCount="10"
-                tools:listitem="@layout/products_list_item" />
-        </ScrollView>
-    </RelativeLayout>
-</RelativeLayout>
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:padding="8dp"
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:itemCount="4"
+            tools:listitem="@layout/products_list_item" />
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

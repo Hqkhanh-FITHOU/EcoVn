@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.MainActivity"
+    android:background="@color/colorSurface"
     android:orientation="vertical">
     
 <!--    <com.google.android.material.tabs.TabLayout-->
@@ -41,13 +42,16 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_nav"
-        android:background="@color/white"
+        android:background="@color/colorSurfaceContainer"
+        app:itemIconSize="24dp"
+        android:translationZ="2dp"
         app:itemIconTint="@color/bottom_nav_item"
         app:itemTextColor="@color/bottom_nav_item"
         app:labelVisibilityMode="labeled"
-
         />
 
 </LinearLayout>

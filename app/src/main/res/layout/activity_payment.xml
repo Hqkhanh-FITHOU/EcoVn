@@ -3,14 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_background"
     tools:context=".view.payment.PaymentActivity">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.appcompat.widget.Toolbar
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/payment_toolbar"
-        android:layout_marginRight="16dp">
+        style="@style/Widget.Material3.Toolbar">
 
         <ImageView
             android:id="@+id/btn_back"
@@ -33,19 +35,13 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <View
-        android:id="@+id/view_below"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#b0b0b0"
-        android:layout_gravity="bottom"
-        android:layout_below="@+id/payment_toolbar"/>
+
 
     <ScrollView
         android:id="@+id/list_payment"
         android:layout_width="match_parent"
         android:layout_height="400dp"
-        android:layout_below="@+id/view_below"
+        android:layout_below="@+id/payment_toolbar"
         android:layout_marginHorizontal="32dp"
         android:layout_marginVertical="8dp"
         android:layout_marginTop="1dp"
@@ -137,7 +133,7 @@
                 android:id="@+id/tv_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 d"
+                android:text="0 đ"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:textColor="@color/Free_Speech_Blue"
@@ -151,10 +147,12 @@
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="60dp"
-        android:backgroundTint="@color/Free_Speech_Blue"
+        android:textSize="16sp"
+        style="@style/Widget.Material3.Button"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginEnd="30dp"
         android:layout_below="@+id/frame_total"
         android:text="Xác nhận"
         android:textColor="@color/white"/>
