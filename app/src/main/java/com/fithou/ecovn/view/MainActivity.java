@@ -5,34 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.fithou.ecovn.R;
-import com.fithou.ecovn.model.authModels;
+import com.fithou.ecovn.model.user.authModels;
 import com.fithou.ecovn.adapter.ViewPagerAdapter;
 import com.fithou.ecovn.view.dashboard.AccountMenuFragment;
 import com.fithou.ecovn.view.dashboard.CartMenuFagment;
 import com.fithou.ecovn.view.dashboard.HomeMenuFragment;
 import com.fithou.ecovn.view.dashboard.NotificationMenuFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.fithou.ecovn.R.id;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 //    TabLayout tabLayout;

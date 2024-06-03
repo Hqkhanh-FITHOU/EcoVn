@@ -1,7 +1,6 @@
 package com.fithou.ecovn.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fithou.ecovn.R;
-import com.fithou.ecovn.model.authModels;
+import com.fithou.ecovn.model.user.authModels;
 import com.fithou.ecovn.model.product.Comment;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
 
 import java.text.SimpleDateFormat;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.fithou.ecovn.helper;
 
-import com.fithou.ecovn.model.authModels;
+import com.fithou.ecovn.model.user.authModels;
 
 public class UserSingleton {
     private static UserSingleton instance;

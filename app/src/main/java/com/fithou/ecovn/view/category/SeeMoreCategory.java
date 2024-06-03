@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.adapter.SeeMoreCategoryAdapter;
-import com.fithou.ecovn.model.CategoryModel;
+import com.fithou.ecovn.model.product.CategoryModel;
 import com.fithou.ecovn.view.search.SearchActivity;
 
 import java.io.Serializable;

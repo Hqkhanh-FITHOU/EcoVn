@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.view.component.MyProgressDialog;
-import com.fithou.ecovn.model.CategoryModel;
+import com.fithou.ecovn.model.product.CategoryModel;
 import com.fithou.ecovn.model.product.ProductsModel;
 import com.fithou.ecovn.view.shop.MyShopActivity;
 import com.google.android.gms.tasks.OnCompleteListener;

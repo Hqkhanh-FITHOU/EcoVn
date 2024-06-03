@@ -2,24 +2,16 @@ package com.fithou.ecovn.view.search;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.adapter.ProductsAdapter;
-import com.fithou.ecovn.model.CategoryModel;
+import com.fithou.ecovn.model.product.CategoryModel;
 import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
 import com.fithou.ecovn.view.product.ProductDetailActivity;

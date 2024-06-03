@@ -1,6 +1,5 @@
 package com.fithou.ecovn.view.auth;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -13,28 +12,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fithou.ecovn.helper.UserSingleton;
-import com.fithou.ecovn.model.authModels;
-import com.fithou.ecovn.model.cart.CartModel;
-import com.fithou.ecovn.model.cart.ProductCartModel;
+import com.fithou.ecovn.model.user.authModels;
 import com.fithou.ecovn.view.MainActivity;
 import com.fithou.ecovn.R;
 
-import com.fithou.ecovn.view.dashboard.AccountMenuFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.badge.BadgeDrawable;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
