@@ -1,4 +1,4 @@
-package com.fithou.ecovn.model;
+package com.fithou.ecovn.model.shop;
 
 import com.google.type.DateTime;
 

@@ -21,7 +21,7 @@ import com.fithou.ecovn.view.MainActivity;
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.adapter.CommentAdapter;
 import com.fithou.ecovn.helper.UserSingleton;
-import com.fithou.ecovn.model.authModels;
+import com.fithou.ecovn.model.user.authModels;
 import com.fithou.ecovn.model.cart.CartModel;
 import com.fithou.ecovn.model.cart.ExtendProductModel;
 import com.fithou.ecovn.model.cart.ProductCartModel;

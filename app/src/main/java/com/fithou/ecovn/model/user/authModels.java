@@ -1,4 +1,4 @@
-package com.fithou.ecovn.model;
+package com.fithou.ecovn.model.user;
 
 import com.google.firebase.Timestamp;
 import com.google.type.DateTime;

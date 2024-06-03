@@ -1,11 +1,9 @@
-package com.fithou.ecovn.model;
+package com.fithou.ecovn.model.product;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-
-import com.fithou.ecovn.model.product.ProductsModel;
 
 import java.io.Serializable;
 

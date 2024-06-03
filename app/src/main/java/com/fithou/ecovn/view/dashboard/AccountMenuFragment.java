@@ -26,6 +26,7 @@ import com.fithou.ecovn.adapter.AccountFeatureAdapter;
 import com.fithou.ecovn.model.AccountFeatureViewModel;
 import com.fithou.ecovn.view.auth.LoginActivity;
 import com.fithou.ecovn.view.auth.RegisterActivity;
+import com.fithou.ecovn.view.setting.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +80,22 @@ public class AccountMenuFragment extends Fragment {
 
         onClickLogin();
         onClickRegister();
+        onClickToolbarMenuItem();
         return view;
+    }
+
+    private void onClickToolbarMenuItem() {
+        account_toobar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()){
+                case R.id.account_menu_setting:{
+                    startActivity(new Intent(getActivity(), SettingActivity.class));
+                }
+                case R.id.account_menu_chatting: {
+
+                }
+            }
+            return false;
+        });
     }
 
     private void onClickLogin() {

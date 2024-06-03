@@ -7,7 +7,7 @@ import com.fithou.ecovn.adapter.CategoryAdapter;
 import com.fithou.ecovn.adapter.DiscountAdapter;
 import com.fithou.ecovn.adapter.ProductsAdapter;
 import com.fithou.ecovn.view.component.MyProgressDialog;
-import com.fithou.ecovn.model.CategoryModel;
+import com.fithou.ecovn.model.product.CategoryModel;
 import com.fithou.ecovn.model.DiscountModel;
 import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
@@ -16,16 +16,12 @@ import com.fithou.ecovn.view.search.SearchActivity;
 import com.fithou.ecovn.view.category.SeeMoreCategory;
 
 import android.app.ActivityOptions;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.compose.animation.Scale;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,8 +30,6 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 

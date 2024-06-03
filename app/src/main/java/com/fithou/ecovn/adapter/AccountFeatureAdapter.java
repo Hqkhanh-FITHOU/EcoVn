@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,7 @@ import com.fithou.ecovn.R;
 import com.fithou.ecovn.view.auth.LoginActivity;
 import com.fithou.ecovn.view.component.MyProgressDialog;
 import com.fithou.ecovn.model.AccountFeatureViewModel;
-import com.fithou.ecovn.model.authModels;
+import com.fithou.ecovn.model.user.authModels;
 import com.fithou.ecovn.view.shop.AskCreateShop;
 import com.fithou.ecovn.view.shop.MyShopActivity;
 import com.google.android.gms.tasks.OnCompleteListener;

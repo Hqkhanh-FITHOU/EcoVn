@@ -31,13 +31,10 @@ import com.fithou.ecovn.adapter.CartAdapter;
 import com.fithou.ecovn.view.auth.LoginActivity;
 import com.fithou.ecovn.view.component.MyProgressDialog;
 import com.fithou.ecovn.helper.CartSingleton;
-import com.fithou.ecovn.helper.UserSingleton;
 import com.fithou.ecovn.model.payment.PaymentModel;
-import com.fithou.ecovn.model.authModels;
 import com.fithou.ecovn.model.cart.CartModel;
 import com.fithou.ecovn.model.cart.ExtendProductModel;
 import com.fithou.ecovn.model.cart.ProductCartModel;
-import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
 import com.fithou.ecovn.view.payment.PaymentActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -46,13 +43,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
