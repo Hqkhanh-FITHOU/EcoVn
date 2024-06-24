@@ -41,11 +41,16 @@
     </style>
 
 
-<style name="Widget.Material3.Button.MyOutlinedButton" parent="Widget.Material3.Button.TextButton">
-    <item name="android:paddingLeft">@dimen/m3_btn_padding_left</item>
-    <item name="android:paddingRight">@dimen/m3_btn_padding_right</item>
-    <item name="strokeColor">@color/colorOnSurface</item>
-    <item name="strokeWidth">@dimen/m3_comp_outlined_button_outline_width</item>
-</style>
+    <style name="Widget.Material3.Button.MyOutlinedButton" parent="Widget.Material3.Button.TextButton">
+        <item name="android:paddingLeft">@dimen/m3_btn_padding_left</item>
+        <item name="android:paddingRight">@dimen/m3_btn_padding_right</item>
+        <item name="strokeColor">@color/colorOnSurface</item>
+        <item name="strokeWidth">@dimen/m3_comp_outlined_button_outline_width</item>
+    </style>
+    
+    <style name="MyAppearenceTablayout" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
 </resources>

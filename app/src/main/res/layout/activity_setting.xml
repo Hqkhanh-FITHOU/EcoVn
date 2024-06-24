@@ -27,6 +27,7 @@
         style="@style/Widget.Material3.TabLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        app:tabTextAppearance="@style/MyAppearenceTablayout"
         android:background="@drawable/header_setting"
         app:tabIndicatorColor="@color/colorPrimary"
         app:tabSelectedTextColor="@color/colorPrimary"
