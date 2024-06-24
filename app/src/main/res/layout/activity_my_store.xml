@@ -95,6 +95,7 @@
                 android:id="@+id/my_shop_tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:tabTextAppearance="@style/MyAppearenceTablayout"
                 android:layout_gravity="bottom"
                 app:tabTextColor="@color/colorOnSecondary"
                 app:tabSelectedTextColor="@color/colorPrimary"

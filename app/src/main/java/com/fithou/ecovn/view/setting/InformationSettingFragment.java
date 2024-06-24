@@ -1,5 +1,6 @@
 package com.fithou.ecovn.view.setting;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +28,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class InformationSettingFragment extends Fragment {
     CircleImageView setting_info_avatar;
     TextView setting_info_email, setting_info_dateofbirth, setting_info_gender, setting_info_phone, setting_info_address;
+
+    Button btn_edit_info;
     public InformationSettingFragment() {
         // Required empty public constructor
     }
@@ -42,6 +46,7 @@ public class InformationSettingFragment extends Fragment {
         setting_info_gender = view.findViewById(R.id.setting_info_gender);
         setting_info_phone = view.findViewById(R.id.setting_info_phone);
         setting_info_address = view.findViewById(R.id.setting_info_address);
+        btn_edit_info = view.findViewById(R.id.btn_edit_info);
     }
 
 
@@ -51,7 +56,15 @@ public class InformationSettingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_information_setting, container, false);
         initViewComponents(view);
         loadViewData();
+
+        onClickToEdit();
         return view;
+    }
+
+    private void onClickToEdit() {
+        btn_edit_info.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), EditAccountActivity.class));
+        });
     }
 
     private void loadViewData() {
@@ -60,7 +73,6 @@ public class InformationSettingFragment extends Fragment {
             setting_info_email.setText(MainActivity.CURRENT_USER.getEmail());
             String gender = MainActivity.CURRENT_USER.isGender() ? "Nam":"Nữ";
             setting_info_gender.setText(gender);
-            setting_info_phone.setText(MainActivity.CURRENT_USER.getPhone());
 
             if(!MainActivity.CURRENT_USER.getDate_of_birth().isEmpty()){
                 SimpleDateFormat formatStringToDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -72,8 +84,22 @@ public class InformationSettingFragment extends Fragment {
                 } catch (ParseException e) {
                     Log.e("datetime parse error", e.toString());
                 }
+            }else {
+                setting_info_dateofbirth.setText("Chưa có thông tin");
             }
-            setting_info_address.setText(MainActivity.CURRENT_USER.getAddress());
+
+            if(MainActivity.CURRENT_USER.getPhone().isEmpty()){
+                setting_info_phone.setText("Chưa có thông tin");
+            }else{
+                setting_info_phone.setText(MainActivity.CURRENT_USER.getPhone());
+            }
+
+            if(MainActivity.CURRENT_USER.getAddress().isEmpty()){
+                setting_info_address.setText("Chưa có thông tin");
+            }else{
+                setting_info_address.setText(MainActivity.CURRENT_USER.getAddress());
+            }
+
         }
     }
 }
