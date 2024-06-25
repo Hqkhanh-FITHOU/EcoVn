@@ -8,12 +8,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.fithou.ecovn.R;
 import com.fithou.ecovn.adapter.ProductsAdapter;
 import com.fithou.ecovn.model.product.CategoryModel;
 import com.fithou.ecovn.model.product.Comment;
 import com.fithou.ecovn.model.product.ProductsModel;
+import com.fithou.ecovn.view.component.MyProgressDialog;
 import com.fithou.ecovn.view.product.ProductDetailActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,6 +60,7 @@ public class SearchActivity extends AppCompatActivity {
         categoryModel = (CategoryModel) intent.getSerializableExtra("CATEGORY_ID");
 
         productsModelList = new ArrayList<>();
+
         productsAdapter = new ProductsAdapter(this,productsModelList);
         productRecyclerView = findViewById(R.id.products_list);
         productRecyclerView.setAdapter(productsAdapter);
@@ -67,9 +70,62 @@ public class SearchActivity extends AppCompatActivity {
         onSearch();
         if(categoryModel != null){
             loadProductsFromFirebase(categoryModel.getId());
+        }else{
+            getAllProducts();
         }
+    }
 
-    };
+    private void getAllProducts() {
+        MyProgressDialog progressDialog = new MyProgressDialog(this);
+        progressDialog.setTitle("");
+        progressDialog.show();
+        firestore.collection("product")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        productsModelList.clear();
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            ProductsModel item = documentSnapshot.toObject(ProductsModel.class);
+                            List<HashMap<String, Object>> commentDataList = (List<HashMap<String, Object>>) documentSnapshot.get("comment");
+                            if (commentDataList != null) {
+                                List<Comment> commentList = new ArrayList<>();
+                                for (HashMap<String, Object> commentData : commentDataList) {
+                                    String userId = (String) commentData.get("user_id");
+                                    String content = (String) commentData.get("content");
+                                    int star = ((Long) commentData.get("star")).intValue();
+                                    String dateTimeString = (String) commentData.get("date_time");
+
+                                    // Chuyển đổi giá trị String sang kiểu DateTime
+                                    if (dateTimeString != null && !dateTimeString.isEmpty()){
+                                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                        Date dateTime = null;
+                                        try {
+                                            dateTime = dateFormat.parse(dateTimeString);
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        Comment comment = new Comment(userId, content, star, dateTime);
+                                        commentList.add(comment);
+                                    }
+                                }
+                                item.setComment(commentList);
+                            }
+                            productsModelList.add(item);
+                        }
+                        productsAdapter.setViewData(productsModelList);
+                        productsAdapter.notifyDataSetChanged();
+                        progressDialog.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Firestore", "Error getting data", e);
+                    }
+                });
+    }
+
 
 //    private void onSearch() {
 //        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -99,10 +155,34 @@ public class SearchActivity extends AppCompatActivity {
         searchView.getEditText().setOnEditorActionListener((v, actionId, event) -> {
             search_activity_search_bar.setText(searchView.getText());
             searchView.hide();
+
+            if(search_activity_search_bar.getText().toString().isEmpty()){
+                getAllProducts();
+            }
+            else {
+
+                MyProgressDialog progressDialog = new MyProgressDialog(this);
+                progressDialog.setTitle("");
+                progressDialog.show();
+
+                List<ProductsModel> filteredProducts = new ArrayList<>();
+                for(ProductsModel product : productsModelList){
+                    if(product.getName().toLowerCase().contains(searchView.getText())){
+                        filteredProducts.add(product);
+                    }
+                }
+
+                if(filteredProducts.isEmpty()){
+                    Toast.makeText(this, "Không tìm thấy dữ liệu", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                }else{
+                    productsAdapter.setViewData(filteredProducts);
+                    productsAdapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
+                }
+            }
             return false;
         });
-
-        
     }
 
     private void onClickBack() {
@@ -135,6 +215,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void loadProductsFromFirebase(String category_id) {
+        MyProgressDialog progressDialog = new MyProgressDialog(this);
+        progressDialog.setTitle("");
+        progressDialog.show();
         firestore.collection("product")
                 .whereEqualTo("fk_category_id",category_id)
                 .get()
@@ -173,6 +256,7 @@ public class SearchActivity extends AppCompatActivity {
                         }
                         productsAdapter.setViewData(productsModelList);
                         productsAdapter.notifyDataSetChanged();
+                        progressDialog.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
